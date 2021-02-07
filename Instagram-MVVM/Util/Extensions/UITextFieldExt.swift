@@ -32,4 +32,16 @@ extension UITextField {
         }
     }
     
+    func createFieldWhiteAlpha(placeHolder:String, keyboard: UIKeyboardType, isSecurity:Bool = false){
+        setCorner(radius: 5)
+        paddingLeft(value: 12)
+        backgroundColor = .init(white: 0.8, alpha: 0.2)
+        textColor = .init(white: 1, alpha: 0.7)
+        font = .systemFont(ofSize: 16, weight: .semibold)
+        keyboardAppearance = .dark
+        keyboardType = keyboard
+        isSecureTextEntry = isSecurity
+        attributedPlaceholder = NSAttributedString(string: placeHolder, attributes: [NSAttributedString.Key.foregroundColor : UIColor.init(white: 1, alpha: 0.7)])
+    }
+    
 }

@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8C4AF43F25D0439B00FF4C99 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4AF43E25D0439B00FF4C99 /* LoginViewController.swift */; };
+		8C4AF44325D059ED00FF4C99 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4AF44225D059ED00FF4C99 /* SignUpViewController.swift */; };
+		8C4AF44725D067B000FF4C99 /* PickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4AF44625D067B000FF4C99 /* PickerView.swift */; };
+		8C4AF44A25D06F5A00FF4C99 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4AF44925D06F5A00FF4C99 /* SignUpViewModel.swift */; };
+		8C4AF44D25D070EE00FF4C99 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4AF44C25D070EE00FF4C99 /* LoginViewModel.swift */; };
 		8C9DAD4425CFA50A00CE1847 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9DAD4325CFA50A00CE1847 /* AppDelegate.swift */; };
 		8C9DAD4625CFA50A00CE1847 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9DAD4525CFA50A00CE1847 /* SceneDelegate.swift */; };
 		8C9DAD4D25CFA50B00CE1847 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8C9DAD4C25CFA50B00CE1847 /* Assets.xcassets */; };
@@ -38,6 +43,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8C4AF43E25D0439B00FF4C99 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		8C4AF44225D059ED00FF4C99 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		8C4AF44625D067B000FF4C99 /* PickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerView.swift; sourceTree = "<group>"; };
+		8C4AF44925D06F5A00FF4C99 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
+		8C4AF44C25D070EE00FF4C99 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		8C9DAD4025CFA50A00CE1847 /* Instagram-MVVM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Instagram-MVVM.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C9DAD4325CFA50A00CE1847 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8C9DAD4525CFA50A00CE1847 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -81,6 +91,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8C4AF43B25D0438200FF4C99 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				8C4AF43E25D0439B00FF4C99 /* LoginViewController.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		8C4AF44125D059D700FF4C99 /* SignUp */ = {
+			isa = PBXGroup;
+			children = (
+				8C4AF44225D059ED00FF4C99 /* SignUpViewController.swift */,
+			);
+			path = SignUp;
+			sourceTree = "<group>";
+		};
 		8C9DAD3725CFA50A00CE1847 = {
 			isa = PBXGroup;
 			children = (
@@ -141,6 +167,8 @@
 		8C9DAD6325CFA8E200CE1847 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				8C4AF44125D059D700FF4C99 /* SignUp */,
+				8C4AF43B25D0438200FF4C99 /* Login */,
 				8C9DAD6C25CFAC0E00CE1847 /* LauchScreen */,
 				8C9DAD6D25CFAC1B00CE1847 /* Main */,
 				8C9DAD6E25CFAC4700CE1847 /* Feed */,
@@ -155,6 +183,8 @@
 		8C9DAD6425CFA8E300CE1847 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				8C4AF44925D06F5A00FF4C99 /* SignUpViewModel.swift */,
+				8C4AF44C25D070EE00FF4C99 /* LoginViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -244,6 +274,7 @@
 			isa = PBXGroup;
 			children = (
 				8C9DADA025CFC52300CE1847 /* BindingTextField.swift */,
+				8C4AF44625D067B000FF4C99 /* PickerView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -329,6 +360,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8C4AF44325D059ED00FF4C99 /* SignUpViewController.swift in Sources */,
+				8C4AF43F25D0439B00FF4C99 /* LoginViewController.swift in Sources */,
 				8C9DAD8825CFB82A00CE1847 /* SearchViewController.swift in Sources */,
 				8C9DADAC25CFC83D00CE1847 /* StringExt.swift in Sources */,
 				8C9DADB225CFC92400CE1847 /* NSNotificationExt.swift in Sources */,
@@ -337,9 +370,12 @@
 				8C9DADC125CFCB1A00CE1847 /* UIImageExt.swift in Sources */,
 				8C9DAD9A25CFBCCD00CE1847 /* UIViewContronllerExt.swift in Sources */,
 				8C9DAD8E25CFB84300CE1847 /* NotificationsViewController.swift in Sources */,
+				8C4AF44A25D06F5A00FF4C99 /* SignUpViewModel.swift in Sources */,
 				8C9DADB525CFC95300CE1847 /* UIButtonExt.swift in Sources */,
 				8C9DAD8525CFB82100CE1847 /* FeedViewController.swift in Sources */,
+				8C4AF44D25D070EE00FF4C99 /* LoginViewModel.swift in Sources */,
 				8C9DADBB25CFC9F200CE1847 /* UITextFieldExt.swift in Sources */,
+				8C4AF44725D067B000FF4C99 /* PickerView.swift in Sources */,
 				8C9DADB825CFC99B00CE1847 /* UILabelExt.swift in Sources */,
 				8C9DADA925CFC78000CE1847 /* UIAlertActionExt.swift in Sources */,
 				8C9DADBE25CFCA3500CE1847 /* UIViewExt.swift in Sources */,

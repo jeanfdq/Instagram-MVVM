@@ -15,6 +15,7 @@ class MainViewController: UITabBarController {
         super.viewDidLoad()
         
         setupVireControllers()
+        verifyUserLogged()
         
     }
     
@@ -32,6 +33,16 @@ class MainViewController: UITabBarController {
         let profile = ProfileViewController().setTemplateNavigationController(FactoryTabBarIcons.profile())
         
         viewControllers = [feed, search, imageSelector, notification, profile]
+    }
+    
+    fileprivate func verifyUserLogged() {
+        
+        DispatchQueue.main.async {
+            let loginVC = LoginViewController()
+            loginVC.modalPresentationStyle = .currentContext
+            self.present(loginVC, animated: false)
+        }
+        
     }
 
 }

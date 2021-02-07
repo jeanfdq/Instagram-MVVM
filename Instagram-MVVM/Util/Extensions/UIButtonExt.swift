@@ -22,4 +22,13 @@ extension UIButton {
         layer.add(animation, forKey: nil)
         
     }
+    
+    func createTransparentButton(_ title:String) {
+        setCorner(radius: 5)
+        setTitle(title, for: .normal)
+        titleLabel?.font = .systemFont(ofSize: 16, weight: .semibold)
+        setBorder(.init(white: 0.8, alpha: 0.5), 0.6)
+        backgroundColor = .clear
+    }
+    
 }

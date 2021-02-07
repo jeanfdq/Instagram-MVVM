@@ -17,7 +17,7 @@ extension UIAlertAction {
         return UIAlertAction(title: title, style: .cancel, handler: handler)
     }
     
-    static func setTitleColor(color:UIColor){
+    func setTitleColor(color:UIColor){
         self.setValue(color, forKey: "titleTextColor")
     }
 }
