@@ -9,21 +9,19 @@
 /* Begin PBXBuildFile section */
 		8C9DAD4425CFA50A00CE1847 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9DAD4325CFA50A00CE1847 /* AppDelegate.swift */; };
 		8C9DAD4625CFA50A00CE1847 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9DAD4525CFA50A00CE1847 /* SceneDelegate.swift */; };
-		8C9DAD4825CFA50A00CE1847 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9DAD4725CFA50A00CE1847 /* ViewController.swift */; };
-		8C9DAD4B25CFA50A00CE1847 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C9DAD4925CFA50A00CE1847 /* Main.storyboard */; };
 		8C9DAD4D25CFA50B00CE1847 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8C9DAD4C25CFA50B00CE1847 /* Assets.xcassets */; };
 		8C9DAD5025CFA50B00CE1847 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C9DAD4E25CFA50B00CE1847 /* LaunchScreen.storyboard */; };
+		8C9DAD6725CFA92600CE1847 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9DAD6625CFA92600CE1847 /* MainViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		8C9DAD4025CFA50A00CE1847 /* Instagram-MVVM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Instagram-MVVM.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C9DAD4325CFA50A00CE1847 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8C9DAD4525CFA50A00CE1847 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		8C9DAD4725CFA50A00CE1847 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		8C9DAD4A25CFA50A00CE1847 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8C9DAD4C25CFA50B00CE1847 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8C9DAD4F25CFA50B00CE1847 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8C9DAD5125CFA50B00CE1847 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8C9DAD6625CFA92600CE1847 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +54,70 @@
 		8C9DAD4225CFA50A00CE1847 /* Instagram-MVVM */ = {
 			isa = PBXGroup;
 			children = (
-				8C9DAD4325CFA50A00CE1847 /* AppDelegate.swift */,
-				8C9DAD4525CFA50A00CE1847 /* SceneDelegate.swift */,
-				8C9DAD4725CFA50A00CE1847 /* ViewController.swift */,
-				8C9DAD4925CFA50A00CE1847 /* Main.storyboard */,
+				8C9DAD5C25CFA89F00CE1847 /* System */,
+				8C9DAD6525CFA8E500CE1847 /* Model */,
+				8C9DAD6425CFA8E300CE1847 /* ViewModel */,
+				8C9DAD6325CFA8E200CE1847 /* View */,
+				8C9DAD6025CFA8D600CE1847 /* Service */,
+				8C9DAD5F25CFA8CF00CE1847 /* Util */,
 				8C9DAD4C25CFA50B00CE1847 /* Assets.xcassets */,
-				8C9DAD4E25CFA50B00CE1847 /* LaunchScreen.storyboard */,
-				8C9DAD5125CFA50B00CE1847 /* Info.plist */,
 			);
 			path = "Instagram-MVVM";
+			sourceTree = "<group>";
+		};
+		8C9DAD5C25CFA89F00CE1847 /* System */ = {
+			isa = PBXGroup;
+			children = (
+				8C9DAD4325CFA50A00CE1847 /* AppDelegate.swift */,
+				8C9DAD4525CFA50A00CE1847 /* SceneDelegate.swift */,
+				8C9DAD5125CFA50B00CE1847 /* Info.plist */,
+			);
+			path = System;
+			sourceTree = "<group>";
+		};
+		8C9DAD5F25CFA8CF00CE1847 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				8C9DAD6A25CFA96700CE1847 /* Extensions */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
+		8C9DAD6025CFA8D600CE1847 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		8C9DAD6325CFA8E200CE1847 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8C9DAD4E25CFA50B00CE1847 /* LaunchScreen.storyboard */,
+				8C9DAD6625CFA92600CE1847 /* MainViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		8C9DAD6425CFA8E300CE1847 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		8C9DAD6525CFA8E500CE1847 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		8C9DAD6A25CFA96700CE1847 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -126,7 +179,6 @@
 			files = (
 				8C9DAD5025CFA50B00CE1847 /* LaunchScreen.storyboard in Resources */,
 				8C9DAD4D25CFA50B00CE1847 /* Assets.xcassets in Resources */,
-				8C9DAD4B25CFA50A00CE1847 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -137,7 +189,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8C9DAD4825CFA50A00CE1847 /* ViewController.swift in Sources */,
+				8C9DAD6725CFA92600CE1847 /* MainViewController.swift in Sources */,
 				8C9DAD4425CFA50A00CE1847 /* AppDelegate.swift in Sources */,
 				8C9DAD4625CFA50A00CE1847 /* SceneDelegate.swift in Sources */,
 			);
@@ -146,14 +198,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		8C9DAD4925CFA50A00CE1847 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				8C9DAD4A25CFA50A00CE1847 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		8C9DAD4E25CFA50B00CE1847 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -288,7 +332,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = VVQ8F653L6;
-				INFOPLIST_FILE = "Instagram-MVVM/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Instagram-MVVM/System/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -307,7 +351,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = VVQ8F653L6;
-				INFOPLIST_FILE = "Instagram-MVVM/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Instagram-MVVM/System/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
