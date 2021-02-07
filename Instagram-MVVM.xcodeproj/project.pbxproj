@@ -24,6 +24,17 @@
 		8C9DAD9125CFB84C00CE1847 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9DAD9025CFB84C00CE1847 /* ProfileViewController.swift */; };
 		8C9DAD9A25CFBCCD00CE1847 /* UIViewContronllerExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9DAD9925CFBCCD00CE1847 /* UIViewContronllerExt.swift */; };
 		8C9DAD9D25CFBE6C00CE1847 /* FactoryTabBarIcons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9DAD9C25CFBE6C00CE1847 /* FactoryTabBarIcons.swift */; };
+		8C9DADA125CFC52300CE1847 /* BindingTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9DADA025CFC52300CE1847 /* BindingTextField.swift */; };
+		8C9DADA625CFC69C00CE1847 /* Loaf in Frameworks */ = {isa = PBXBuildFile; productRef = 8C9DADA525CFC69C00CE1847 /* Loaf */; };
+		8C9DADA925CFC78000CE1847 /* UIAlertActionExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9DADA825CFC78000CE1847 /* UIAlertActionExt.swift */; };
+		8C9DADAC25CFC83D00CE1847 /* StringExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9DADAB25CFC83D00CE1847 /* StringExt.swift */; };
+		8C9DADAF25CFC8FE00CE1847 /* UIColorExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9DADAE25CFC8FE00CE1847 /* UIColorExt.swift */; };
+		8C9DADB225CFC92400CE1847 /* NSNotificationExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9DADB125CFC92400CE1847 /* NSNotificationExt.swift */; };
+		8C9DADB525CFC95300CE1847 /* UIButtonExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9DADB425CFC95300CE1847 /* UIButtonExt.swift */; };
+		8C9DADB825CFC99B00CE1847 /* UILabelExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9DADB725CFC99B00CE1847 /* UILabelExt.swift */; };
+		8C9DADBB25CFC9F200CE1847 /* UITextFieldExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9DADBA25CFC9F200CE1847 /* UITextFieldExt.swift */; };
+		8C9DADBE25CFCA3500CE1847 /* UIViewExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9DADBD25CFCA3500CE1847 /* UIViewExt.swift */; };
+		8C9DADC125CFCB1A00CE1847 /* UIImageExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9DADC025CFCB1A00CE1847 /* UIImageExt.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +53,16 @@
 		8C9DAD9025CFB84C00CE1847 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		8C9DAD9925CFBCCD00CE1847 /* UIViewContronllerExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewContronllerExt.swift; sourceTree = "<group>"; };
 		8C9DAD9C25CFBE6C00CE1847 /* FactoryTabBarIcons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactoryTabBarIcons.swift; sourceTree = "<group>"; };
+		8C9DADA025CFC52300CE1847 /* BindingTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BindingTextField.swift; sourceTree = "<group>"; };
+		8C9DADA825CFC78000CE1847 /* UIAlertActionExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlertActionExt.swift; sourceTree = "<group>"; };
+		8C9DADAB25CFC83D00CE1847 /* StringExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExt.swift; sourceTree = "<group>"; };
+		8C9DADAE25CFC8FE00CE1847 /* UIColorExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExt.swift; sourceTree = "<group>"; };
+		8C9DADB125CFC92400CE1847 /* NSNotificationExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSNotificationExt.swift; sourceTree = "<group>"; };
+		8C9DADB425CFC95300CE1847 /* UIButtonExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonExt.swift; sourceTree = "<group>"; };
+		8C9DADB725CFC99B00CE1847 /* UILabelExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelExt.swift; sourceTree = "<group>"; };
+		8C9DADBA25CFC9F200CE1847 /* UITextFieldExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextFieldExt.swift; sourceTree = "<group>"; };
+		8C9DADBD25CFCA3500CE1847 /* UIViewExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExt.swift; sourceTree = "<group>"; };
+		8C9DADC025CFCB1A00CE1847 /* UIImageExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExt.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,6 +71,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8C9DAD7625CFB02000CE1847 /* FirebaseRemoteConfig in Frameworks */,
+				8C9DADA625CFC69C00CE1847 /* Loaf in Frameworks */,
 				8C9DAD7C25CFB02000CE1847 /* FirebaseFirestore in Frameworks */,
 				8C9DAD7A25CFB02000CE1847 /* FirebaseAuth in Frameworks */,
 				8C9DAD7825CFB02000CE1847 /* FirebaseStorage in Frameworks */,
@@ -103,6 +125,7 @@
 		8C9DAD5F25CFA8CF00CE1847 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				8C9DAD9F25CFC50A00CE1847 /* Components */,
 				8C9DAD6A25CFA96700CE1847 /* Extensions */,
 			);
 			path = Util;
@@ -147,6 +170,15 @@
 			isa = PBXGroup;
 			children = (
 				8C9DAD9925CFBCCD00CE1847 /* UIViewContronllerExt.swift */,
+				8C9DADA825CFC78000CE1847 /* UIAlertActionExt.swift */,
+				8C9DADAB25CFC83D00CE1847 /* StringExt.swift */,
+				8C9DADAE25CFC8FE00CE1847 /* UIColorExt.swift */,
+				8C9DADB125CFC92400CE1847 /* NSNotificationExt.swift */,
+				8C9DADB425CFC95300CE1847 /* UIButtonExt.swift */,
+				8C9DADB725CFC99B00CE1847 /* UILabelExt.swift */,
+				8C9DADBA25CFC9F200CE1847 /* UITextFieldExt.swift */,
+				8C9DADBD25CFCA3500CE1847 /* UIViewExt.swift */,
+				8C9DADC025CFCB1A00CE1847 /* UIImageExt.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -208,6 +240,14 @@
 			path = Profile;
 			sourceTree = "<group>";
 		};
+		8C9DAD9F25CFC50A00CE1847 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				8C9DADA025CFC52300CE1847 /* BindingTextField.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -229,6 +269,7 @@
 				8C9DAD7725CFB02000CE1847 /* FirebaseStorage */,
 				8C9DAD7925CFB02000CE1847 /* FirebaseAuth */,
 				8C9DAD7B25CFB02000CE1847 /* FirebaseFirestore */,
+				8C9DADA525CFC69C00CE1847 /* Loaf */,
 			);
 			productName = "Instagram-MVVM";
 			productReference = 8C9DAD4025CFA50A00CE1847 /* Instagram-MVVM.app */;
@@ -259,6 +300,7 @@
 			mainGroup = 8C9DAD3725CFA50A00CE1847;
 			packageReferences = (
 				8C9DAD7425CFB02000CE1847 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				8C9DADA425CFC69C00CE1847 /* XCRemoteSwiftPackageReference "Loaf" */,
 			);
 			productRefGroup = 8C9DAD4125CFA50A00CE1847 /* Products */;
 			projectDirPath = "";
@@ -288,13 +330,23 @@
 			buildActionMask = 2147483647;
 			files = (
 				8C9DAD8825CFB82A00CE1847 /* SearchViewController.swift in Sources */,
+				8C9DADAC25CFC83D00CE1847 /* StringExt.swift in Sources */,
+				8C9DADB225CFC92400CE1847 /* NSNotificationExt.swift in Sources */,
 				8C9DAD6725CFA92600CE1847 /* MainViewController.swift in Sources */,
 				8C9DAD4425CFA50A00CE1847 /* AppDelegate.swift in Sources */,
+				8C9DADC125CFCB1A00CE1847 /* UIImageExt.swift in Sources */,
 				8C9DAD9A25CFBCCD00CE1847 /* UIViewContronllerExt.swift in Sources */,
 				8C9DAD8E25CFB84300CE1847 /* NotificationsViewController.swift in Sources */,
+				8C9DADB525CFC95300CE1847 /* UIButtonExt.swift in Sources */,
 				8C9DAD8525CFB82100CE1847 /* FeedViewController.swift in Sources */,
+				8C9DADBB25CFC9F200CE1847 /* UITextFieldExt.swift in Sources */,
+				8C9DADB825CFC99B00CE1847 /* UILabelExt.swift in Sources */,
+				8C9DADA925CFC78000CE1847 /* UIAlertActionExt.swift in Sources */,
+				8C9DADBE25CFCA3500CE1847 /* UIViewExt.swift in Sources */,
 				8C9DAD4625CFA50A00CE1847 /* SceneDelegate.swift in Sources */,
 				8C9DAD9D25CFBE6C00CE1847 /* FactoryTabBarIcons.swift in Sources */,
+				8C9DADA125CFC52300CE1847 /* BindingTextField.swift in Sources */,
+				8C9DADAF25CFC8FE00CE1847 /* UIColorExt.swift in Sources */,
 				8C9DAD9125CFB84C00CE1847 /* ProfileViewController.swift in Sources */,
 				8C9DAD8B25CFB83600CE1847 /* ImageSelectorViewController.swift in Sources */,
 			);
@@ -500,6 +552,14 @@
 				minimumVersion = 7.5.1;
 			};
 		};
+		8C9DADA425CFC69C00CE1847 /* XCRemoteSwiftPackageReference "Loaf" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/schmidyy/Loaf/";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.7.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -522,6 +582,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8C9DAD7425CFB02000CE1847 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestore;
+		};
+		8C9DADA525CFC69C00CE1847 /* Loaf */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8C9DADA425CFC69C00CE1847 /* XCRemoteSwiftPackageReference "Loaf" */;
+			productName = Loaf;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
