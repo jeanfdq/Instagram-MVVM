@@ -20,7 +20,7 @@ class SignUpViewController: UIViewController {
     
     var pickerView = PickerView()
     
-    lazy var profilePhoto:UIButton = {
+    lazy var profilePhotoButton:UIButton = {
         let photo = UIButton()
         photo.setImage(UIImage(named: "plus_photo")?.withTintColor(.white).withRenderingMode(.alwaysOriginal), for: .normal)
         photo.contentVerticalAlignment = .fill
@@ -33,6 +33,8 @@ class SignUpViewController: UIViewController {
         
         return photo
     }()
+    
+    fileprivate var profilePhoto:UIImage?
     
     lazy var emailField:BindingTextField = {
         let field = BindingTextField()
@@ -70,6 +72,9 @@ class SignUpViewController: UIViewController {
     lazy var signupButton:UIButton = {
         let btn = UIButton()
         btn.createTransparentButton("Sign Up")
+        btn.addTapGesture { [weak self] in
+            self?.signUp()
+        }
         return btn
     }()
     
@@ -110,8 +115,8 @@ class SignUpViewController: UIViewController {
     }
     
     fileprivate func setupConstraintsSubViews() {
-        view.addSubViews(profilePhoto, containerFields)
-        profilePhoto.applyViewConstraints(top: view.topAnchor, centerX: view.centerXAnchor, size: .init(width: 120, height: 120), value: .init(top: 32, left: 0, bottom: 0, right: 0))
+        view.addSubViews(profilePhotoButton, containerFields)
+        profilePhotoButton.applyViewConstraints(top: view.topAnchor, centerX: view.centerXAnchor, size: .init(width: 120, height: 120), value: .init(top: 32, left: 0, bottom: 0, right: 0))
         containerFields.applyCenterIntoSuperView(size: .init(width: view.frame.width * 0.8, height: 260))
     }
     
@@ -153,6 +158,31 @@ class SignUpViewController: UIViewController {
         
     }
     
+    fileprivate func signUp() {
+        viewModel.profileImage = profilePhoto
+        
+        if viewModel.validateFields() {
+
+            let progress = self.showLoading()
+
+
+            viewModel.createUser { result in
+
+                switch result {
+                case .failure(let error): self.showLoafError(message: error.rawValue)
+                case .success(): self.dismissToRoot()
+                }
+
+                progress.dismiss()
+
+            }
+
+        } else {
+            signupButton.setErrorAnime()
+        }
+        
+    }
+    
 }
 
 extension SignUpViewController:UITextFieldDelegate {
@@ -163,7 +193,9 @@ extension SignUpViewController:UITextFieldDelegate {
         case emailField: passwordField.becomeFirstResponder()
         case passwordField: fullNameField.becomeFirstResponder()
         case fullNameField: userNameField.becomeFirstResponder()
-        default: self.view.dismissKeyboard()
+        default:
+            self.view.dismissKeyboard()
+            self.signUp()
         }
         return true
     }
@@ -173,7 +205,8 @@ extension SignUpViewController:UITextFieldDelegate {
 extension SignUpViewController:getPhotoFromPickerViewProtocol{
     
     func getPhoto(_ imagePickerView: UIImage) {
-        profilePhoto.setImage(imagePickerView, for: .normal)
+        profilePhoto = imagePickerView
+        profilePhotoButton.setImage(imagePickerView, for: .normal)
     }
     
 }

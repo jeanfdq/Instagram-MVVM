@@ -7,6 +7,7 @@
 
 import UIKit
 import Loaf
+import JGProgressHUD
 
 extension UIViewController {
     
@@ -40,6 +41,13 @@ extension UIViewController {
     
     func showLoafError(message: String, duration:Double = 2.0 ){
         Loaf(message, state: .error, location: .top, presentingDirection: .vertical, dismissingDirection: .vertical, sender: self).show(.custom(duration))
+    }
+    
+    func showLoading() -> JGProgressHUD{
+        let progress = JGProgressHUD()
+        progress.textLabel.text = "aguarde..."
+        progress.show(in: self.view, animated: true)
+        return progress
     }
     
 }
