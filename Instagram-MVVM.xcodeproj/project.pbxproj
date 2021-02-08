@@ -47,6 +47,7 @@
 		8C9DADBB25CFC9F200CE1847 /* UITextFieldExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9DADBA25CFC9F200CE1847 /* UITextFieldExt.swift */; };
 		8C9DADBE25CFCA3500CE1847 /* UIViewExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9DADBD25CFCA3500CE1847 /* UIViewExt.swift */; };
 		8C9DADC125CFCB1A00CE1847 /* UIImageExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9DADC025CFCB1A00CE1847 /* UIImageExt.swift */; };
+		8CA4D6CC25D0BC1800208F91 /* NotificationNameExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA4D6CB25D0BC1800208F91 /* NotificationNameExt.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -86,6 +87,7 @@
 		8C9DADBA25CFC9F200CE1847 /* UITextFieldExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextFieldExt.swift; sourceTree = "<group>"; };
 		8C9DADBD25CFCA3500CE1847 /* UIViewExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExt.swift; sourceTree = "<group>"; };
 		8C9DADC025CFCB1A00CE1847 /* UIImageExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExt.swift; sourceTree = "<group>"; };
+		8CA4D6CB25D0BC1800208F91 /* NotificationNameExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationNameExt.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -228,6 +230,7 @@
 				8C9DADBA25CFC9F200CE1847 /* UITextFieldExt.swift */,
 				8C9DADBD25CFCA3500CE1847 /* UIViewExt.swift */,
 				8C9DADC025CFCB1A00CE1847 /* UIImageExt.swift */,
+				8CA4D6CB25D0BC1800208F91 /* NotificationNameExt.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -395,6 +398,7 @@
 				8C9DAD9A25CFBCCD00CE1847 /* UIViewContronllerExt.swift in Sources */,
 				8C4AF45025D0724E00FF4C99 /* FirebaseInstances.swift in Sources */,
 				8C9DAD8E25CFB84300CE1847 /* NotificationsViewController.swift in Sources */,
+				8CA4D6CC25D0BC1800208F91 /* NotificationNameExt.swift in Sources */,
 				8C4AF44A25D06F5A00FF4C99 /* SignUpViewModel.swift in Sources */,
 				8C9DADB525CFC95300CE1847 /* UIButtonExt.swift in Sources */,
 				8C9DAD8525CFB82100CE1847 /* FeedViewController.swift in Sources */,

@@ -8,41 +8,55 @@
 import UIKit
 
 class MainViewController: UITabBarController {
-
+    
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupVireControllers()
-        verifyUserLogged()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.verifyUserLogged), name: .NCD_UserLogout, object: nil)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        verifyUserLogged()
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
     
     fileprivate func setupVireControllers() {
         
         let feed = FeedViewController().setTemplateNavigationController(FactoryTabBarIcons.home())
         
         let search = SearchViewController().setTemplateNavigationController(FactoryTabBarIcons.search())
-
+        
         let imageSelector = ImageSelectorViewController().setTemplateNavigationController(FactoryTabBarIcons.imageSelector())
-
+        
         let notification = NotificationsViewController().setTemplateNavigationController(FactoryTabBarIcons.notifications())
-
+        
         let profile = ProfileViewController().setTemplateNavigationController(FactoryTabBarIcons.profile())
         
         viewControllers = [feed, search, imageSelector, notification, profile]
     }
     
-    fileprivate func verifyUserLogged() {
-        
+    @objc fileprivate func verifyUserLogged() {
         DispatchQueue.main.async {
-            let loginVC = LoginViewController()
-            loginVC.modalPresentationStyle = .currentContext
-            self.present(loginVC, animated: false)
+            if !AuthService.shared.isUserLogged {
+                let loginVC = LoginViewController()
+                loginVC.modalPresentationStyle = .currentContext
+                self.present(loginVC, animated: false)
+            }
         }
         
     }
-
+    
 }

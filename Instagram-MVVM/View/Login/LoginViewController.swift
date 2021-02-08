@@ -26,6 +26,7 @@ class LoginViewController: UIViewController {
     lazy var emailField:BindingTextField = {
         let email = BindingTextField()
         email.createFieldWhiteAlpha(placeHolder: "e-mail", keyboard: .emailAddress)
+        email.autocapitalizationType = .none
         email.bind { [unowned self] in self.viewModel.email = $0 }
         return email
     }()
@@ -37,9 +38,12 @@ class LoginViewController: UIViewController {
         return password
     }()
     
-    let loginButton:UIButton = {
+    lazy var loginButton:UIButton = {
         let btn = UIButton()
         btn.createTransparentButton("Log In")
+        btn.addTapGesture { [weak self] in
+            self?.login()
+        }
         return btn
     }()
     
@@ -107,6 +111,28 @@ class LoginViewController: UIViewController {
         
         containerViews.applyCenterIntoSuperView(size: .init(width: view.frame.width * 0.8, height: 300))
         signupLabel.applyViewConstraints( bottom: view.safeAreaLayoutGuide.bottomAnchor, centerX: view.centerXAnchor, value: .init(top: 0, left: 0, bottom: 15, right: 0))
+    }
+    
+    fileprivate func login() {
+        
+        if viewModel.validateFields() {
+            
+            let progress = self.showLoading()
+            
+            viewModel.doLogin { [weak self] isLogged in
+                if isLogged {
+                    self?.dismissToRoot()
+                } else {
+                    self?.showLoafError(message: "Usuário/Senha inválido.")
+                }
+                
+                progress.dismiss()
+                self?.dismissToRoot()
+            }
+        } else {
+            loginButton.setErrorAnime()
+        }
+        
     }
 
 }
