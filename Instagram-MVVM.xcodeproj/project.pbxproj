@@ -48,6 +48,7 @@
 		8C9DADBE25CFCA3500CE1847 /* UIViewExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9DADBD25CFCA3500CE1847 /* UIViewExt.swift */; };
 		8C9DADC125CFCB1A00CE1847 /* UIImageExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9DADC025CFCB1A00CE1847 /* UIImageExt.swift */; };
 		8CA4D6CC25D0BC1800208F91 /* NotificationNameExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA4D6CB25D0BC1800208F91 /* NotificationNameExt.swift */; };
+		8CA4D6CF25D0CBD900208F91 /* FeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA4D6CE25D0CBD900208F91 /* FeedCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -88,6 +89,7 @@
 		8C9DADBD25CFCA3500CE1847 /* UIViewExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExt.swift; sourceTree = "<group>"; };
 		8C9DADC025CFCB1A00CE1847 /* UIImageExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExt.swift; sourceTree = "<group>"; };
 		8CA4D6CB25D0BC1800208F91 /* NotificationNameExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationNameExt.swift; sourceTree = "<group>"; };
+		8CA4D6CE25D0CBD900208F91 /* FeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -256,6 +258,7 @@
 			isa = PBXGroup;
 			children = (
 				8C9DAD8425CFB82100CE1847 /* FeedViewController.swift */,
+				8CA4D6CE25D0CBD900208F91 /* FeedCell.swift */,
 			);
 			path = Feed;
 			sourceTree = "<group>";
@@ -411,6 +414,7 @@
 				8C9DADA925CFC78000CE1847 /* UIAlertActionExt.swift in Sources */,
 				8C9DADBE25CFCA3500CE1847 /* UIViewExt.swift in Sources */,
 				8C9DAD4625CFA50A00CE1847 /* SceneDelegate.swift in Sources */,
+				8CA4D6CF25D0CBD900208F91 /* FeedCell.swift in Sources */,
 				8C9DAD9D25CFBE6C00CE1847 /* FactoryTabBarIcons.swift in Sources */,
 				8C4AF45D25D07A1200FF4C99 /* StorageService.swift in Sources */,
 				8C9DADA125CFC52300CE1847 /* BindingTextField.swift in Sources */,

@@ -9,8 +9,6 @@ import UIKit
 
 class MainViewController: UITabBarController {
     
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -35,7 +33,7 @@ class MainViewController: UITabBarController {
     
     fileprivate func setupVireControllers() {
         
-        let feed = FeedViewController().setTemplateNavigationController(FactoryTabBarIcons.home())
+        let feed = FeedViewController(collectionViewLayout: UICollectionViewFlowLayout()).setTemplateNavigationController(FactoryTabBarIcons.home())
         
         let search = SearchViewController().setTemplateNavigationController(FactoryTabBarIcons.search())
         
