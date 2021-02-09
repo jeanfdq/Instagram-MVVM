@@ -7,8 +7,27 @@
 
 import UIKit
 
-class ProfileViewController: UIViewController {
-
+class ProfileViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+    
+    // MARK: - Properties
+    
+    var user:User? {
+        didSet{
+            guard let user = user else {return}
+            userNameLabel.text = user.userName
+            collectionView.reloadData()
+        }
+    }
+    
+    let reusableProfileHeaderId = "reusableHeaderId"
+    let reusableProfileCellId = "reusableCellId"
+    
+    lazy var userNameLabel:UILabel = {
+        let userName = UILabel()
+        userName.font = .systemFont(ofSize: 14, weight: .semibold)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: userName)
+        return userName
+    }()
     
     lazy var logoutLabel:UILabel = {
         let logout = UILabel()
@@ -21,12 +40,33 @@ class ProfileViewController: UIViewController {
         return logout
     }()
     
+    // MARK: - LifeCycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        view.backgroundColor = .cyan
-        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: logoutLabel)
         
+        setupView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        DispatchQueue.main.async {
+            UserService.shared.fetchUser { (result) in
+                switch result {
+                case .failure(let err): self.showLoafError(message: err.localizedDescription)
+                case .success(let user): self.user = user
+                }
+            }
+        }
+    }
+    
+    // MARK: - functions
+    
+    fileprivate func setupView() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: logoutLabel)
+        collectionView.backgroundColor = .white
+        collectionView.register(ProfileHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: reusableProfileHeaderId)
+        collectionView.register(ProfileCell.self, forCellWithReuseIdentifier: reusableProfileCellId)
     }
     
     @objc fileprivate func logout(){
@@ -47,5 +87,38 @@ class ProfileViewController: UIViewController {
         
         
     }
-
+    
+    //MARK: - CollectionView Functions
+    
+    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: reusableProfileHeaderId, for: indexPath) as! ProfileHeaderView
+        return header
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return .init(width: view.frame.width, height: view.frame.height * 0.45)
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 6
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reusableProfileCellId, for: indexPath) as! ProfileCell
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let widthCell = (view.frame.width - 2) / 3
+        return .init(width: widthCell, height: widthCell)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 1
+    }
+    
 }

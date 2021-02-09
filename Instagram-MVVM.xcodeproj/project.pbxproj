@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8C3C12D425D206B000881764 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C12D325D206B000881764 /* ProfileHeaderView.swift */; };
+		8C3C12D725D206D500881764 /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C12D625D206D500881764 /* ProfileCell.swift */; };
+		8C3C12DA25D226D000881764 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C12D925D226D000881764 /* UserService.swift */; };
+		8C3C12DE25D2288500881764 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C12DD25D2288500881764 /* User.swift */; };
+		8C3C12E225D22E5E00881764 /* EncodableExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C12E125D22E5E00881764 /* EncodableExt.swift */; };
+		8C3C12E525D22E7A00881764 /* DataExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C12E425D22E7A00881764 /* DataExt.swift */; };
+		8C3C12E825D230F600881764 /* DictionaryExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C12E725D230F600881764 /* DictionaryExt.swift */; };
 		8C4AF43F25D0439B00FF4C99 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4AF43E25D0439B00FF4C99 /* LoginViewController.swift */; };
 		8C4AF44325D059ED00FF4C99 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4AF44225D059ED00FF4C99 /* SignUpViewController.swift */; };
 		8C4AF44725D067B000FF4C99 /* PickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4AF44625D067B000FF4C99 /* PickerView.swift */; };
@@ -52,6 +59,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8C3C12D325D206B000881764 /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
+		8C3C12D625D206D500881764 /* ProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
+		8C3C12D925D226D000881764 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		8C3C12DD25D2288500881764 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		8C3C12E125D22E5E00881764 /* EncodableExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncodableExt.swift; sourceTree = "<group>"; };
+		8C3C12E425D22E7A00881764 /* DataExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataExt.swift; sourceTree = "<group>"; };
+		8C3C12E725D230F600881764 /* DictionaryExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryExt.swift; sourceTree = "<group>"; };
 		8C4AF43E25D0439B00FF4C99 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		8C4AF44225D059ED00FF4C99 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		8C4AF44625D067B000FF4C99 /* PickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerView.swift; sourceTree = "<group>"; };
@@ -148,7 +162,7 @@
 				8C9DAD6525CFA8E500CE1847 /* Model */,
 				8C9DAD6425CFA8E300CE1847 /* ViewModel */,
 				8C9DAD6325CFA8E200CE1847 /* View */,
-				8C9DAD6025CFA8D600CE1847 /* Service */,
+				8C9DAD6025CFA8D600CE1847 /* Services */,
 				8C9DAD5F25CFA8CF00CE1847 /* Util */,
 				8C9DAD4C25CFA50B00CE1847 /* Assets.xcassets */,
 				8C9DAD7E25CFB25300CE1847 /* GoogleService-Info.plist */,
@@ -176,15 +190,16 @@
 			path = Util;
 			sourceTree = "<group>";
 		};
-		8C9DAD6025CFA8D600CE1847 /* Service */ = {
+		8C9DAD6025CFA8D600CE1847 /* Services */ = {
 			isa = PBXGroup;
 			children = (
 				8C4AF44F25D0724E00FF4C99 /* FirebaseInstances.swift */,
 				8C4AF45225D074C500FF4C99 /* AuthService.swift */,
 				8C4AF45625D0781200FF4C99 /* DBService.swift */,
 				8C4AF45C25D07A1200FF4C99 /* StorageService.swift */,
+				8C3C12D925D226D000881764 /* UserService.swift */,
 			);
-			path = Service;
+			path = Services;
 			sourceTree = "<group>";
 		};
 		8C9DAD6325CFA8E200CE1847 /* View */ = {
@@ -215,6 +230,7 @@
 		8C9DAD6525CFA8E500CE1847 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				8C3C12DD25D2288500881764 /* User.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -233,6 +249,9 @@
 				8C9DADBD25CFCA3500CE1847 /* UIViewExt.swift */,
 				8C9DADC025CFCB1A00CE1847 /* UIImageExt.swift */,
 				8CA4D6CB25D0BC1800208F91 /* NotificationNameExt.swift */,
+				8C3C12E125D22E5E00881764 /* EncodableExt.swift */,
+				8C3C12E425D22E7A00881764 /* DataExt.swift */,
+				8C3C12E725D230F600881764 /* DictionaryExt.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -291,6 +310,8 @@
 			isa = PBXGroup;
 			children = (
 				8C9DAD9025CFB84C00CE1847 /* ProfileViewController.swift */,
+				8C3C12D325D206B000881764 /* ProfileHeaderView.swift */,
+				8C3C12D625D206D500881764 /* ProfileCell.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -389,14 +410,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				8C4AF46425D099AF00FF4C99 /* Progress.swift in Sources */,
+				8C3C12E525D22E7A00881764 /* DataExt.swift in Sources */,
 				8C4AF44325D059ED00FF4C99 /* SignUpViewController.swift in Sources */,
 				8C4AF43F25D0439B00FF4C99 /* LoginViewController.swift in Sources */,
 				8C9DAD8825CFB82A00CE1847 /* SearchViewController.swift in Sources */,
+				8C3C12E825D230F600881764 /* DictionaryExt.swift in Sources */,
 				8C9DADAC25CFC83D00CE1847 /* StringExt.swift in Sources */,
 				8C9DADB225CFC92400CE1847 /* NSNotificationExt.swift in Sources */,
 				8C4AF45A25D078E200FF4C99 /* Constants.swift in Sources */,
 				8C9DAD6725CFA92600CE1847 /* MainViewController.swift in Sources */,
 				8C9DAD4425CFA50A00CE1847 /* AppDelegate.swift in Sources */,
+				8C3C12E225D22E5E00881764 /* EncodableExt.swift in Sources */,
 				8C9DADC125CFCB1A00CE1847 /* UIImageExt.swift in Sources */,
 				8C9DAD9A25CFBCCD00CE1847 /* UIViewContronllerExt.swift in Sources */,
 				8C4AF45025D0724E00FF4C99 /* FirebaseInstances.swift in Sources */,
@@ -408,7 +432,10 @@
 				8C4AF44D25D070EE00FF4C99 /* LoginViewModel.swift in Sources */,
 				8C9DADBB25CFC9F200CE1847 /* UITextFieldExt.swift in Sources */,
 				8C4AF44725D067B000FF4C99 /* PickerView.swift in Sources */,
+				8C3C12DA25D226D000881764 /* UserService.swift in Sources */,
 				8C4AF45725D0781200FF4C99 /* DBService.swift in Sources */,
+				8C3C12D425D206B000881764 /* ProfileHeaderView.swift in Sources */,
+				8C3C12DE25D2288500881764 /* User.swift in Sources */,
 				8C4AF45325D074C500FF4C99 /* AuthService.swift in Sources */,
 				8C9DADB825CFC99B00CE1847 /* UILabelExt.swift in Sources */,
 				8C9DADA925CFC78000CE1847 /* UIAlertActionExt.swift in Sources */,
@@ -421,6 +448,7 @@
 				8C9DADAF25CFC8FE00CE1847 /* UIColorExt.swift in Sources */,
 				8C9DAD9125CFB84C00CE1847 /* ProfileViewController.swift in Sources */,
 				8C9DAD8B25CFB83600CE1847 /* ImageSelectorViewController.swift in Sources */,
+				8C3C12D725D206D500881764 /* ProfileCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

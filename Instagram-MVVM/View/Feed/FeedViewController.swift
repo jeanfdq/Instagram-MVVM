@@ -48,4 +48,8 @@ extension FeedViewController:UICollectionViewDelegateFlowLayout {
         return .init(width: view.frame.width, height: view.frame.height * 0.6)
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 40
+    }
+    
 }

@@ -50,36 +50,46 @@ class FeedCell: UICollectionViewCell {
         return photo
     }()
     
-    fileprivate let sizeIconsPost:CGFloat = 25
+    fileprivate let sizeIconsPost:CGFloat = 22
     
     lazy var likePost:UIImageView = {
-        let like = UIImageView(image: UIImage(systemName: "heart", withConfiguration: UIImage.SymbolConfiguration(weight: .regular))?.withTintColor(.black, renderingMode: .alwaysOriginal))
+        let like = UIImageView(image: UIImage(systemName: "heart", withConfiguration: UIImage.SymbolConfiguration(weight: .thin))?.withTintColor(.black, renderingMode: .alwaysOriginal))
         return like
     }()
     
     lazy var commentPost:UIImageView = {
-        let comment = UIImageView(image: UIImage(systemName: "bubble.left", withConfiguration: UIImage.SymbolConfiguration(weight: .regular))?.withTintColor(.black, renderingMode: .alwaysOriginal))
+        let comment = UIImageView(image: UIImage(systemName: "bubble.left", withConfiguration: UIImage.SymbolConfiguration(weight: .thin))?.withTintColor(.black, renderingMode: .alwaysOriginal))
         return comment
     }()
     
     lazy var sendPost:UIImageView = {
-        let send = UIImageView(image: UIImage(systemName: "paperplane", withConfiguration: UIImage.SymbolConfiguration(weight: .regular))?.withTintColor(.black, renderingMode: .alwaysOriginal))
+        let send = UIImageView(image: UIImage(systemName: "paperplane", withConfiguration: UIImage.SymbolConfiguration(weight: .thin))?.withTintColor(.black, renderingMode: .alwaysOriginal))
         return send
     }()
     
     lazy var savePost:UIImageView = {
-        let save = UIImageView(image: UIImage(systemName: "bookmark", withConfiguration: UIImage.SymbolConfiguration(weight: .regular))?.withTintColor(.black, renderingMode: .alwaysOriginal))
+        let save = UIImageView(image: UIImage(systemName: "bookmark", withConfiguration: UIImage.SymbolConfiguration(weight: .thin))?.withTintColor(.black, renderingMode: .alwaysOriginal))
         return save
+    }()
+    
+    let quantityLike:UILabel = {
+        let qtdLike = UILabel()
+        qtdLike.textColor = .darkGray
+        qtdLike.textAlignment = .left
+        qtdLike.text = "2 likes"
+        qtdLike.font = .systemFont(ofSize: 11, weight: .semibold)
+        return qtdLike
     }()
     
     lazy var postBottom:UIView = {
        let container = UIView()
-        container.addSubViews(likePost, commentPost, sendPost, savePost)
+        container.addSubViews(likePost, commentPost, sendPost, savePost, quantityLike)
         
         likePost.applyViewConstraints(leading: container.leadingAnchor, centerY: container.centerYAnchor, size: .init(width: sizeIconsPost, height: sizeIconsPost), value: .init(top: 0, left: 8, bottom: 0, right: 0))
         commentPost.applyViewConstraints(leading: likePost.trailingAnchor, centerY: container.centerYAnchor, size: .init(width: sizeIconsPost, height: sizeIconsPost), value: .init(top: 0, left: 8, bottom: 0, right: 0))
         sendPost.applyViewConstraints(leading: commentPost.trailingAnchor, centerY: container.centerYAnchor, size: .init(width: sizeIconsPost, height: sizeIconsPost), value: .init(top: 0, left: 8, bottom: 0, right: 0))
         savePost.applyViewConstraints(trailing: container.trailingAnchor, centerY: container.centerYAnchor, size: .init(width: sizeIconsPost, height: sizeIconsPost), value: .init(top: 0, left: 0, bottom: 0, right: 8))
+        quantityLike.applyViewConstraints(leading: likePost.leadingAnchor, top: likePost.bottomAnchor, trailing: container.trailingAnchor, value: .init(top: 4, left: 0, bottom: 0, right: 0))
         
         return container
     }()
@@ -90,8 +100,8 @@ class FeedCell: UICollectionViewCell {
         backgroundColor = .white
         addSubViews(postHeader, photoPost, postBottom)
         postHeader.applyViewConstraints(leading: leadingAnchor, top: topAnchor, trailing: trailingAnchor, size: .zero, value: .init(top: 5, left: 10, bottom: 0, right: 10))
-        photoPost.applyViewConstraints(leading: leadingAnchor, top: postHeader.bottomAnchor, trailing: trailingAnchor, bottom: postBottom.topAnchor, value: .init(top: 10, left: 0, bottom: 0, right: 0))
-        postBottom.applyViewConstraints(leading: leadingAnchor, trailing: trailingAnchor, bottom: bottomAnchor, size: .init(width: 0, height: 32), value: .zero)
+        photoPost.applyViewConstraints(leading: leadingAnchor, top: postHeader.bottomAnchor, trailing: trailingAnchor, bottom: postBottom.topAnchor, value: .init(top: 5, left: 0, bottom: 0, right: 0))
+        postBottom.applyViewConstraints(leading: leadingAnchor, trailing: trailingAnchor, bottom: bottomAnchor, size: .init(width: 0, height: 30), value: .zero)
     }
     
     required init?(coder: NSCoder) {
