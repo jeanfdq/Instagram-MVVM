@@ -86,6 +86,19 @@ class SignUpViewController: UIViewController {
         return stack
     }()
     
+    lazy var loginLabel:UILabel = {
+        let label = UILabel()
+        label.isUserInteractionEnabled = true
+        label.setTitleAttributeswith(firstTitle: "Already have an account? ", firstColor: .init(white: 0.9, alpha: 0.7), sizeFirstFont: 15, isfirsBold: false, secondTitle: "Log In", secondColor: .init(white: 1, alpha: 0.7), sizeSecondFont: 15, isSecondBold: true)
+        
+        // call signup screen
+        label.addTapGesture { [weak self] in
+            self?.dismiss(animated: true)
+        }
+        
+        return label
+    }()
+    
     // MARK: - LifeCycle
     
     override func viewDidLoad() {
@@ -115,9 +128,10 @@ class SignUpViewController: UIViewController {
     }
     
     fileprivate func setupConstraintsSubViews() {
-        view.addSubViews(profilePhotoButton, containerFields)
+        view.addSubViews(profilePhotoButton, containerFields, loginLabel)
         profilePhotoButton.applyViewConstraints(top: view.topAnchor, centerX: view.centerXAnchor, size: .init(width: 120, height: 120), value: .init(top: 32, left: 0, bottom: 0, right: 0))
         containerFields.applyCenterIntoSuperView(size: .init(width: view.frame.width * 0.8, height: 260))
+        loginLabel.applyViewConstraints( bottom: view.bottomAnchor, centerX: view.centerXAnchor, value: .init(top: 0, left: 0, bottom: 30, right: 0))
     }
     
     fileprivate func choosePhoto(){

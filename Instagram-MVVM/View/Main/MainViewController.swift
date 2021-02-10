@@ -11,7 +11,7 @@ class MainViewController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        view.backgroundColor = .white
         NotificationCenter.default.addObserver(self, selector: #selector(self.verifyUserLogged), name: .NCD_UserLogout, object: nil)
     }
     
@@ -62,6 +62,9 @@ class MainViewController: UITabBarController {
     }
     
     fileprivate func fetchUser() {
+        
+        let progress = Progress.show(view)
+        
         DispatchQueue.main.async {
             UserService.shared.fetchUser { [weak self] (result) in
                 switch result {
@@ -72,6 +75,7 @@ class MainViewController: UITabBarController {
                     guard let user = user else {return}
                     self?.setupVireControllers(with: user)
                 }
+                progress.dismiss()
             }
         }
     }

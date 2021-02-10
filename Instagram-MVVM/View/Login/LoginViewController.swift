@@ -128,7 +128,6 @@ class LoginViewController: UIViewController {
                 }
                 
                 progress.dismiss()
-                self?.dismissToRoot()
             }
         } else {
             loginButton.setErrorAnime()
