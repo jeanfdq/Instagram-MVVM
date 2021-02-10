@@ -9,10 +9,12 @@ import UIKit
 
 class ProfileCell: UICollectionViewCell {
     
+    
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        backgroundColor = .magenta
+        backgroundColor = .init(white: 0.6, alpha: 0.5)
         
     }
     

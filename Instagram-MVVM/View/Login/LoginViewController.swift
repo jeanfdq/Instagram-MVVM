@@ -120,6 +120,7 @@ class LoginViewController: UIViewController {
             let progress = self.showLoading()
             
             viewModel.doLogin { [weak self] isLogged in
+                
                 if isLogged {
                     self?.dismissToRoot()
                 } else {

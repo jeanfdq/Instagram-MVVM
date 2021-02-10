@@ -12,8 +12,6 @@ class MainViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupVireControllers()
-        
         NotificationCenter.default.addObserver(self, selector: #selector(self.verifyUserLogged), name: .NCD_UserLogout, object: nil)
     }
     
@@ -31,7 +29,7 @@ class MainViewController: UITabBarController {
         NotificationCenter.default.removeObserver(self)
     }
     
-    fileprivate func setupVireControllers() {
+    fileprivate func setupVireControllers(with user:User) {
         
         let feed = FeedViewController(collectionViewLayout: UICollectionViewFlowLayout()).setTemplateNavigationController(FactoryTabBarIcons.home())
         
@@ -41,20 +39,41 @@ class MainViewController: UITabBarController {
         
         let notification = NotificationsViewController().setTemplateNavigationController(FactoryTabBarIcons.notifications())
         
-        let profile = ProfileViewController(collectionViewLayout: UICollectionViewFlowLayout()).setTemplateNavigationController(FactoryTabBarIcons.profile())
+        let profile = ProfileViewController(user).setTemplateNavigationController(FactoryTabBarIcons.profile())
         
         viewControllers = [feed, search, imageSelector, notification, profile]
+        
     }
     
     @objc fileprivate func verifyUserLogged() {
-        DispatchQueue.main.async {
+        DispatchQueue.main.async {[weak self] in
             if !AuthService.shared.isUserLogged {
+                
                 let loginVC = LoginViewController()
                 loginVC.modalPresentationStyle = .currentContext
-                self.present(loginVC, animated: false)
+                self?.present(loginVC, animated: false)
+                self?.selectedIndex = 0
+                
+            } else {
+                self?.fetchUser()
             }
         }
         
+    }
+    
+    fileprivate func fetchUser() {
+        DispatchQueue.main.async {
+            UserService.shared.fetchUser { [weak self] (result) in
+                switch result {
+                case .failure(let err):
+                    self?.showLoafError(message: err.localizedDescription)
+                    
+                case .success(let user):
+                    guard let user = user else {return}
+                    self?.setupVireControllers(with: user)
+                }
+            }
+        }
     }
     
 }

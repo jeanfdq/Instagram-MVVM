@@ -11,13 +11,7 @@ class ProfileViewController: UICollectionViewController, UICollectionViewDelegat
     
     // MARK: - Properties
     
-    var user:User? {
-        didSet{
-            guard let user = user else {return}
-            userNameLabel.text = user.userName
-            collectionView.reloadData()
-        }
-    }
+    fileprivate var user:User
     
     let reusableProfileHeaderId = "reusableHeaderId"
     let reusableProfileCellId = "reusableCellId"
@@ -25,7 +19,6 @@ class ProfileViewController: UICollectionViewController, UICollectionViewDelegat
     lazy var userNameLabel:UILabel = {
         let userName = UILabel()
         userName.font = .systemFont(ofSize: 14, weight: .semibold)
-        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: userName)
         return userName
     }()
     
@@ -42,28 +35,30 @@ class ProfileViewController: UICollectionViewController, UICollectionViewDelegat
     
     // MARK: - LifeCycle
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        setupView()
+    init(_ user:User) {
+        self.user = user
+        super.init(collectionViewLayout: UICollectionViewFlowLayout())
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        DispatchQueue.main.async {
-            UserService.shared.fetchUser { (result) in
-                switch result {
-                case .failure(let err): self.showLoafError(message: err.localizedDescription)
-                case .success(let user): self.user = user
-                }
-            }
-        }
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupView()
+        setupCollectionView()
     }
     
     // MARK: - functions
     
     fileprivate func setupView() {
+        userNameLabel.text = user.userName
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: userNameLabel)
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: logoutLabel)
+    }
+    
+    fileprivate func setupCollectionView(){
         collectionView.backgroundColor = .white
         collectionView.register(ProfileHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: reusableProfileHeaderId)
         collectionView.register(ProfileCell.self, forCellWithReuseIdentifier: reusableProfileCellId)
@@ -92,11 +87,12 @@ class ProfileViewController: UICollectionViewController, UICollectionViewDelegat
     
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: reusableProfileHeaderId, for: indexPath) as! ProfileHeaderView
+        header.viewModel = ProfileHeaderViewModel(user)
         return header
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return .init(width: view.frame.width, height: view.frame.height * 0.45)
+        return .init(width: view.frame.width, height: view.frame.height * 0.22)
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
