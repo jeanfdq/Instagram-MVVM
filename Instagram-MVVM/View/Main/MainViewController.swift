@@ -33,7 +33,7 @@ class MainViewController: UITabBarController {
         
         let feed = FeedViewController(collectionViewLayout: UICollectionViewFlowLayout()).setTemplateNavigationController(FactoryTabBarIcons.home())
         
-        let search = SearchViewController().setTemplateNavigationController(FactoryTabBarIcons.search())
+        let search = SearchViewController(collectionViewLayout: UICollectionViewFlowLayout()).setTemplateNavigationController(FactoryTabBarIcons.search())
         
         let imageSelector = ImageSelectorViewController().setTemplateNavigationController(FactoryTabBarIcons.imageSelector())
         
@@ -58,7 +58,6 @@ class MainViewController: UITabBarController {
                 self?.fetchUser()
             }
         }
-        
     }
     
     fileprivate func fetchUser() {
@@ -66,7 +65,7 @@ class MainViewController: UITabBarController {
         let progress = Progress.show(view)
         
         DispatchQueue.main.async {
-            UserService.shared.fetchUser { [weak self] (result) in
+            UserService.fetchUser { [weak self] (result) in
                 switch result {
                 case .failure(let err):
                     self?.showLoafError(message: err.localizedDescription)

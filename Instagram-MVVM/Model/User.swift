@@ -15,4 +15,9 @@ struct User:Codable {
     let fullName:String
     let userName:String
     
+    static func dictionaryToModel(dictionary:[String:Any]) -> Self{
+        let model:User? = dictionary.toData()?.toModel()
+        return model ?? User(id: "", profileImage: "", email: "", fullName: "", userName: "")
+    }
+    
 }

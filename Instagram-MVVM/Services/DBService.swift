@@ -48,8 +48,8 @@ class DBService: NSObject {
                                         
                                         //Vamos gravar o user no Firestore
                                         let userDictionary = viewModel.createdViewmodelDictionary(userId, imageURL)
-                                        let instance = FirebaseInstances.db()
-                                        instance.collection(USER_COLLECTION).document(userId)
+
+                                        USER_COLLECTION.document(userId)
                                             .setData(userDictionary) { (err) in
                                                 
                                                 if let _ = err {

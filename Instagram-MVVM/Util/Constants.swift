@@ -7,5 +7,5 @@
 
 import Foundation
 
-let USER_COLLECTION = "users"
+let USER_COLLECTION = FirebaseInstances.db().collection("users") 
 let PHOTO_PATH_STORAGE = "profile_photos"

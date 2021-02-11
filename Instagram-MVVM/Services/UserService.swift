@@ -9,16 +9,12 @@ import Foundation
 
 class UserService: NSObject {
     
-    //Singleton
-    static let shared = UserService()
-    
     // MARK: - Properties
-    fileprivate let instanceDB = FirebaseInstances.db()
     
-    func fetchUser(completion:@escaping(Result<User?,Error>)->Void) {
+    static func fetchUser(completion:@escaping(Result<User?,Error>)->Void) {
         if let userId = AuthService.shared.getCurrentUserId() {
             
-            instanceDB.collection(USER_COLLECTION).document(userId)
+            USER_COLLECTION.document(userId)
                 .getDocument { (snapshot, error) in
                     
                     if let error = error {
@@ -31,6 +27,27 @@ class UserService: NSObject {
                     }
                     
                 }
+        }
+        
+    }
+    
+    static func fetchAllUsers(completion:@escaping(Result<[User],Error>)->Void) {
+        
+        USER_COLLECTION.getDocuments { (snapshot, error) in
+            
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                
+                guard let userId = AuthService.shared.getCurrentUserId() else {return}
+                guard let snapshot = snapshot else {return}
+                
+                let listOfUsers = snapshot.documents.map { User.dictionaryToModel(dictionary: $0.data()) }
+                let listOfUserWithoutMe = listOfUsers.filter { $0.id != userId}
+                completion(.success(listOfUserWithoutMe))
+                
+            }
+            
         }
         
     }
