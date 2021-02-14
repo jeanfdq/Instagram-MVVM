@@ -62,9 +62,7 @@ class ProfileViewController: UICollectionViewController, UICollectionViewDelegat
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        getUserStas()
-        checkIfUserIsFollwed()
-        
+        callSetupProfile()
     }
     
     // MARK: - functions
@@ -79,6 +77,11 @@ class ProfileViewController: UICollectionViewController, UICollectionViewDelegat
         collectionView.backgroundColor = .white
         collectionView.register(ProfileHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: reusableProfileHeaderId)
         collectionView.register(ProfileCell.self, forCellWithReuseIdentifier: reusableProfileCellId)
+    }
+    
+    fileprivate func callSetupProfile(){
+        getUserStas()
+        checkIfUserIsFollwed()
     }
     
     fileprivate func getUserStas() {
@@ -104,7 +107,7 @@ class ProfileViewController: UICollectionViewController, UICollectionViewDelegat
         UserService.follow(user.id) { [weak self] result in
             switch result {
             case .failure(let err): self?.showLoafError(message: err.localizedDescription)
-            case .success(): self?.checkIfUserIsFollwed()
+            case .success(): self?.callSetupProfile()
             }
             progress.dismiss()
         }
@@ -116,7 +119,7 @@ class ProfileViewController: UICollectionViewController, UICollectionViewDelegat
         UserService.unfollow(user.id) { [weak self] result in
             switch result {
             case .failure(let err): self?.showLoafError(message: err.localizedDescription)
-            case .success(): self?.checkIfUserIsFollwed()
+            case .success(): self?.callSetupProfile()
                 
             }
             progress.dismiss()
