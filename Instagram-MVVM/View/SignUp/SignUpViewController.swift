@@ -25,6 +25,7 @@ class SignUpViewController: UIViewController {
         photo.setImage(UIImage(named: "plus_photo")?.withTintColor(.white).withRenderingMode(.alwaysOriginal), for: .normal)
         photo.contentVerticalAlignment = .fill
         photo.contentHorizontalAlignment = .fill
+        photo.contentMode = .scaleAspectFill
         photo.setCorner(radius: 60)
         
         photo.addTapGesture { [weak self] in

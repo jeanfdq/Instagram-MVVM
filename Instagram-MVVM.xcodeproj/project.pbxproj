@@ -35,7 +35,6 @@
 		8C9DAD7825CFB02000CE1847 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 8C9DAD7725CFB02000CE1847 /* FirebaseStorage */; };
 		8C9DAD7A25CFB02000CE1847 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 8C9DAD7925CFB02000CE1847 /* FirebaseAuth */; };
 		8C9DAD7C25CFB02000CE1847 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 8C9DAD7B25CFB02000CE1847 /* FirebaseFirestore */; };
-		8C9DAD7F25CFB25300CE1847 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C9DAD7E25CFB25300CE1847 /* GoogleService-Info.plist */; };
 		8C9DAD8525CFB82100CE1847 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9DAD8425CFB82100CE1847 /* FeedViewController.swift */; };
 		8C9DAD8825CFB82A00CE1847 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9DAD8725CFB82A00CE1847 /* SearchViewController.swift */; };
 		8C9DAD8B25CFB83600CE1847 /* ImageSelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9DAD8A25CFB83600CE1847 /* ImageSelectorViewController.swift */; };
@@ -58,6 +57,9 @@
 		8CA4D6CF25D0CBD900208F91 /* FeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA4D6CE25D0CBD900208F91 /* FeedCell.swift */; };
 		8CB38FC225D3184E00262FF1 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 8CB38FC125D3184E00262FF1 /* SDWebImage */; };
 		8CB38FC525D35BCC00262FF1 /* ProfileHeaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB38FC425D35BCC00262FF1 /* ProfileHeaderViewModel.swift */; };
+		A963256025D8A6CF006C4477 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A963255F25D8A6CF006C4477 /* GoogleService-Info.plist */; };
+		A963256425D8C7CA006C4477 /* SearchUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A963256325D8C7CA006C4477 /* SearchUserCell.swift */; };
+		A963256725D8C93A006C4477 /* SearchUserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A963256625D8C93A006C4477 /* SearchUserViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -86,7 +88,6 @@
 		8C9DAD4F25CFA50B00CE1847 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8C9DAD5125CFA50B00CE1847 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8C9DAD6625CFA92600CE1847 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
-		8C9DAD7E25CFB25300CE1847 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8C9DAD8425CFB82100CE1847 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		8C9DAD8725CFB82A00CE1847 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		8C9DAD8A25CFB83600CE1847 /* ImageSelectorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSelectorViewController.swift; sourceTree = "<group>"; };
@@ -107,6 +108,9 @@
 		8CA4D6CB25D0BC1800208F91 /* NotificationNameExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationNameExt.swift; sourceTree = "<group>"; };
 		8CA4D6CE25D0CBD900208F91 /* FeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCell.swift; sourceTree = "<group>"; };
 		8CB38FC425D35BCC00262FF1 /* ProfileHeaderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderViewModel.swift; sourceTree = "<group>"; };
+		A963255F25D8A6CF006C4477 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		A963256325D8C7CA006C4477 /* SearchUserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUserCell.swift; sourceTree = "<group>"; };
+		A963256625D8C93A006C4477 /* SearchUserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUserViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,7 +173,7 @@
 				8C9DAD6025CFA8D600CE1847 /* Services */,
 				8C9DAD5F25CFA8CF00CE1847 /* Util */,
 				8C9DAD4C25CFA50B00CE1847 /* Assets.xcassets */,
-				8C9DAD7E25CFB25300CE1847 /* GoogleService-Info.plist */,
+				A963255F25D8A6CF006C4477 /* GoogleService-Info.plist */,
 			);
 			path = "Instagram-MVVM";
 			sourceTree = "<group>";
@@ -228,6 +232,7 @@
 				8C4AF44925D06F5A00FF4C99 /* SignUpViewModel.swift */,
 				8C4AF44C25D070EE00FF4C99 /* LoginViewModel.swift */,
 				8CB38FC425D35BCC00262FF1 /* ProfileHeaderViewModel.swift */,
+				A963256625D8C93A006C4477 /* SearchUserViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -291,6 +296,7 @@
 			isa = PBXGroup;
 			children = (
 				8C9DAD8725CFB82A00CE1847 /* SearchViewController.swift */,
+				A963256325D8C7CA006C4477 /* SearchUserCell.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -405,7 +411,7 @@
 			files = (
 				8C9DAD5025CFA50B00CE1847 /* LaunchScreen.storyboard in Resources */,
 				8C9DAD4D25CFA50B00CE1847 /* Assets.xcassets in Resources */,
-				8C9DAD7F25CFB25300CE1847 /* GoogleService-Info.plist in Resources */,
+				A963256025D8A6CF006C4477 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -425,11 +431,13 @@
 				8C9DADAC25CFC83D00CE1847 /* StringExt.swift in Sources */,
 				8C9DADB225CFC92400CE1847 /* NSNotificationExt.swift in Sources */,
 				8C4AF45A25D078E200FF4C99 /* Constants.swift in Sources */,
+				A963256725D8C93A006C4477 /* SearchUserViewModel.swift in Sources */,
 				8C9DAD6725CFA92600CE1847 /* MainViewController.swift in Sources */,
 				8C9DAD4425CFA50A00CE1847 /* AppDelegate.swift in Sources */,
 				8C3C12E225D22E5E00881764 /* EncodableExt.swift in Sources */,
 				8C9DADC125CFCB1A00CE1847 /* UIImageExt.swift in Sources */,
 				8C9DAD9A25CFBCCD00CE1847 /* UIViewContronllerExt.swift in Sources */,
+				A963256425D8C7CA006C4477 /* SearchUserCell.swift in Sources */,
 				8C4AF45025D0724E00FF4C99 /* FirebaseInstances.swift in Sources */,
 				8C9DAD8E25CFB84300CE1847 /* NotificationsViewController.swift in Sources */,
 				8CA4D6CC25D0BC1800208F91 /* NotificationNameExt.swift in Sources */,
@@ -596,7 +604,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = VVQ8F653L6;
+				DEVELOPMENT_TEAM = FA2T538YTG;
 				INFOPLIST_FILE = "$(SRCROOT)/Instagram-MVVM/System/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -615,7 +623,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = VVQ8F653L6;
+				DEVELOPMENT_TEAM = FA2T538YTG;
 				INFOPLIST_FILE = "$(SRCROOT)/Instagram-MVVM/System/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

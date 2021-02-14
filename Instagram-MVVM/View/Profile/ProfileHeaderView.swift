@@ -63,11 +63,8 @@ class ProfileHeaderView: UICollectionReusableView {
     
     lazy var editPofileBtn:UIButton = {
         let btn = UIButton()
-        btn.setTitle("Edit Profile", for: .normal)
-        btn.setTitleColor(.darkGray, for: .normal)
         btn.setBorder(.darkGray, 0.4)
         btn.setCorner(radius: 5)
-        btn.backgroundColor = .clear
         btn.titleLabel?.font = .systemFont(ofSize: 13, weight: .semibold)
         return btn
     }()
@@ -86,7 +83,7 @@ class ProfileHeaderView: UICollectionReusableView {
         profileImage.applyViewConstraints(leading: leadingAnchor, top: topAnchor, size: .init(width: 80, height: 80), value: .init(top: 10, left: 10, bottom: 0, right: 0))
         fullNameLabel.applyViewConstraints(leading: profileImage.leadingAnchor, top: profileImage.bottomAnchor, trailing: trailingAnchor, value: .init(top: 10, left: 0, bottom: 0, right: 5))
         containerQuantities.applyViewConstraints(leading: profileImage.trailingAnchor, trailing: trailingAnchor, centerY: profileImage.centerYAnchor, size: .zero, value: .init(top: 0, left: 15, bottom: 0, right: 30))
-        editPofileBtn.applyViewConstraints( top: fullNameLabel.bottomAnchor, centerX: centerXAnchor, size: .init(width: frame.width * 0.9, height: 25), value: .init(top: 12, left: 0, bottom: 0, right: 0))
+        editPofileBtn.applyViewConstraints( top: fullNameLabel.bottomAnchor, centerX: centerXAnchor, size: .init(width: frame.width * 0.9, height: 30), value: .init(top: 12, left: 0, bottom: 0, right: 0))
         separatorLine.applyViewConstraints( top: editPofileBtn.bottomAnchor, centerX: centerXAnchor, size: .init(width: frame.width * 0.95, height: 0.3), value: .init(top: 15, left: 0, bottom: 0, right: 0))
     }
     
@@ -97,6 +94,10 @@ class ProfileHeaderView: UICollectionReusableView {
     // MARK: - functions
     
     fileprivate func configureProfile(_ viewModel: ProfileHeaderViewModel) {
+        editPofileBtn.setTitle(viewModel.profileBtnTitle, for: .normal)
+        editPofileBtn.setTitleColor(viewModel.profileBtnTextColor, for: .normal)
+        editPofileBtn.backgroundColor = viewModel.profileBtnBackground
+        
         profileImage.sd_setImage(with: URL(string: viewModel.profileImage))
         fullNameLabel.text = viewModel.fullName
     }

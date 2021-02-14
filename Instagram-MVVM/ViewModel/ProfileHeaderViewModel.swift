@@ -5,7 +5,7 @@
 //  Created by Jean Paul Borges Manzini on 09/02/21.
 //
 
-import Foundation
+import UIKit
 
 class ProfileHeaderViewModel: NSObject {
     
@@ -21,6 +21,22 @@ class ProfileHeaderViewModel: NSObject {
     
     var fullName:String {
         return user.fullName
+    }
+    
+    var isCurrentUser:Bool {
+        return AuthService.shared.getCurrentUserId() == user.id
+    }
+    
+    var profileBtnTitle:String {
+        return isCurrentUser ? "Edit Profile" : "Follow"
+    }
+    
+    var profileBtnBackground:UIColor {
+        return isCurrentUser ? .clear : .systemBlue
+    }
+    
+    var profileBtnTextColor:UIColor {
+        return isCurrentUser ? .darkGray : .white
     }
     
 }

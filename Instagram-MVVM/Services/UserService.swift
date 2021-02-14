@@ -14,7 +14,7 @@ class UserService: NSObject {
     static func fetchUser(completion:@escaping(Result<User?,Error>)->Void) {
         if let userId = AuthService.shared.getCurrentUserId() {
             
-            USER_COLLECTION.document(userId)
+            COLLECTION_USERS.document(userId)
                 .getDocument { (snapshot, error) in
                     
                     if let error = error {
@@ -33,7 +33,7 @@ class UserService: NSObject {
     
     static func fetchAllUsers(completion:@escaping(Result<[User],Error>)->Void) {
         
-        USER_COLLECTION.getDocuments { (snapshot, error) in
+        COLLECTION_USERS.getDocuments { (snapshot, error) in
             
             if let error = error {
                 completion(.failure(error))

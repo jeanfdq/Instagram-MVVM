@@ -14,10 +14,11 @@ struct User:Codable {
     let email:String
     let fullName:String
     let userName:String
+    let userSearch:String
     
     static func dictionaryToModel(dictionary:[String:Any]) -> Self{
         let model:User? = dictionary.toData()?.toModel()
-        return model ?? User(id: "", profileImage: "", email: "", fullName: "", userName: "")
+        return model ?? User(id: "", profileImage: "", email: "", fullName: "", userName: "", userSearch:"")
     }
     
 }

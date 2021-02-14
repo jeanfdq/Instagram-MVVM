@@ -13,12 +13,20 @@ class ProfileViewController: UICollectionViewController, UICollectionViewDelegat
     
     fileprivate var user:User
     
-    let reusableProfileHeaderId = "reusableHeaderId"
-    let reusableProfileCellId = "reusableCellId"
+    open var isDisplayMode:Bool = false
+    
+    private let reusableProfileHeaderId = "reusableHeaderId"
+    private let reusableProfileCellId = "reusableCellId"
     
     lazy var userNameLabel:UILabel = {
         let userName = UILabel()
         userName.font = .systemFont(ofSize: 14, weight: .semibold)
+        userName.isUserInteractionEnabled = true
+        userName.addTapGesture {[unowned self] in
+            if self.isDisplayMode {
+                self.navigationController?.popViewController(animated: true)
+            }
+        }
         return userName
     }()
     
@@ -26,6 +34,7 @@ class ProfileViewController: UICollectionViewController, UICollectionViewDelegat
         let logout = UILabel()
         logout.text = "logout"
         logout.font = .systemFont(ofSize: 13, weight: .semibold)
+        logout.isHidden = isDisplayMode
         logout.isUserInteractionEnabled = true
         logout.addTapGesture {
             self.logout()
@@ -53,7 +62,7 @@ class ProfileViewController: UICollectionViewController, UICollectionViewDelegat
     // MARK: - functions
     
     fileprivate func setupView() {
-        userNameLabel.text = user.userName
+        userNameLabel.text = isDisplayMode ? "voltar" : user.userName
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: userNameLabel)
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: logoutLabel)
     }

@@ -48,16 +48,26 @@ class DBService: NSObject {
                                         
                                         //Vamos gravar o user no Firestore
                                         let userDictionary = viewModel.createdViewmodelDictionary(userId, imageURL)
-
-                                        USER_COLLECTION.document(userId)
+                                        
+                                        COLLECTION_USERS.document(userId)
                                             .setData(userDictionary) { (err) in
                                                 
                                                 if let _ = err {
-                                                    completion(.failure(.createUserError)) }
-                                                else {
-                                                    completion(.success(()))
+                                                    completion(.failure(.createUserError))
                                                 }
-                                                
+                                                else {
+                                                    
+                                                    COLLECTION_USERS.document(userId).setData(["userSearch" : viewModel.fulltextSearchFields], merge: true) { error in
+                                                        
+                                                        if let _ = error {
+                                                            completion(.failure(.createUserError))
+                                                            
+                                                        } else {
+                                                            completion(.success(()))
+                                                        }
+                                                        
+                                                    }
+                                                }
                                             }
                                         
                                     }
@@ -69,7 +79,7 @@ class DBService: NSObject {
                         }
                         
                     }
-
+                    
                 }
                 
             }

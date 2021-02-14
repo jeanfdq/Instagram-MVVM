@@ -9,10 +9,27 @@ import UIKit
 
 class SearchViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
 
-    //private let searchController = UISearchController(searchResultsController: nil)
+    // MARK: - Properties
     private let reuseIdentifierSearchCell = "cellId"
     
-    private var listOfUsers = [User]()
+    private var listOfUsers:[User] = [] {
+        didSet {
+            if listOfUsers.count > 0 {
+                filteredListUsers = listOfUsers
+                collectionView.reloadData()
+            }
+        }
+    }
+    private var filteredListUsers = [User]()
+    
+    private var userSelected:User? {
+        didSet {
+            guard let userSelected = userSelected else {return}
+            let profileVC = ProfileViewController(userSelected)
+            profileVC.isDisplayMode = true
+            self.navigationController?.pushViewController(profileVC, animated: true)
+        }
+    }
     
     
     lazy var searchController:UISearchController = {
@@ -26,7 +43,6 @@ class SearchViewController: UICollectionViewController, UICollectionViewDelegate
         searchControl.searchBar.searchTextField.textColor           = .darkGray
         searchControl.searchBar.searchTextField.backgroundColor     = .clear
         searchControl.searchBar.delegate = self
-        searchControl.searchBar.setShowsCancelButton(true, animated: true)
         definesPresentationContext = false
         return searchControl
     }()
@@ -48,7 +64,7 @@ class SearchViewController: UICollectionViewController, UICollectionViewDelegate
         navigationItem.titleView = searchController.searchBar
         
         collectionView.backgroundColor = .white
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifierSearchCell)
+        collectionView.register(SearchUserCell.self, forCellWithReuseIdentifier: reuseIdentifierSearchCell)
     }
     
     fileprivate func fetchListUsers() {
@@ -69,11 +85,12 @@ class SearchViewController: UICollectionViewController, UICollectionViewDelegate
     // MARK: - CollectionView Events
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return listOfUsers.count
+        return filteredListUsers.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifierSearchCell, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifierSearchCell, for: indexPath) as! SearchUserCell
+        cell.viewModel = SearchUserViewModel(filteredListUsers[indexPath.item])
         return cell
     }
 
@@ -90,11 +107,22 @@ class SearchViewController: UICollectionViewController, UICollectionViewDelegate
         return 1
     }
     
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        userSelected = filteredListUsers[indexPath.item]
+    }
+    
 }
 
 //MARK: - SearchBar Events
 extension SearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        guard let searchText = searchBar.text else {return}
+        guard let searchText = searchBar.text?.lowercased() else {return}
+        filteredListUsers = listOfUsers.filter { $0.userSearch.lowercased().replace(string: "-", replacement: " ").contains(searchText) }
+        collectionView.reloadData()
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        filteredListUsers = listOfUsers
+        collectionView.reloadData()
     }
 }

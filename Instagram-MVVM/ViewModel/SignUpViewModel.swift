@@ -14,6 +14,7 @@ struct SignUpViewModel {
     var password:String = ""
     var fullName:String = ""
     var userName:String = ""
+    var userSearch:String = ""
     
     
     func validateFields() -> Bool {
@@ -32,9 +33,13 @@ struct SignUpViewModel {
         return isValidate
     }
     
+    var fulltextSearchFields:String {
+        return "\(self.email)-\(self.fullName)-\(self.userName)"
+    }
+    
     func createdViewmodelDictionary(_ userId:String, _ profileImageUrl:String) -> [String:Any] {
      
-        let dictionary:[String:Any] = ["id": userId, "fullName":self.fullName, "userName":self.userName, "email":self.email, "profileImage":profileImageUrl]
+        let dictionary:[String:Any] = ["id": userId, "fullName":self.fullName, "userName":self.userName, "email":self.email, "profileImage":profileImageUrl, "userSearch":userSearch]
         return dictionary
         
     }
