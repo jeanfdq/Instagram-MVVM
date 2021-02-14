@@ -42,6 +42,9 @@ class ProfileViewController: UICollectionViewController, UICollectionViewDelegat
         return logout
     }()
     
+    var setUserToFollowed:((String)->Void)?
+    var setUserToUnFollowed:((String)->Void)?
+    
     // MARK: - LifeCycle
     
     init(_ user:User) {
@@ -59,6 +62,11 @@ class ProfileViewController: UICollectionViewController, UICollectionViewDelegat
         setupCollectionView()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        NotificationCenter.default.post(name: .NCD_UserQtdHeaderProfile, object: nil)
+    }
+    
     // MARK: - functions
     
     fileprivate func setupView() {
@@ -71,6 +79,45 @@ class ProfileViewController: UICollectionViewController, UICollectionViewDelegat
         collectionView.backgroundColor = .white
         collectionView.register(ProfileHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: reusableProfileHeaderId)
         collectionView.register(ProfileCell.self, forCellWithReuseIdentifier: reusableProfileCellId)
+    }
+    
+    fileprivate func actionEditProfile() {
+      
+    }
+    
+    fileprivate func actionFollowProfile() {
+        let progress = Progress.show(view)
+        UserService.follow(user.id) { [weak self] result in
+            switch result {
+            case .failure(let err): self?.showLoafError(message: err.localizedDescription)
+            case .success():
+                if let user = self?.user {
+                    self?.user.followed = true
+                    self?.setUserToFollowed?(user.id)
+                    self?.collectionView.reloadData()
+                }
+                
+            }
+            progress.dismiss()
+        }
+        
+    }
+    
+    fileprivate func actionUnfollowProfile() {
+        let progress = Progress.show(view)
+        UserService.unfollow(user.id) { [weak self] result in
+            switch result {
+            case .failure(let err): self?.showLoafError(message: err.localizedDescription)
+            case .success():
+                if let user = self?.user {
+                    self?.user.followed = false
+                    self?.setUserToUnFollowed?(user.id)
+                    self?.collectionView.reloadData()
+                }
+                
+            }
+            progress.dismiss()
+        }
     }
     
     @objc fileprivate func logout(){
@@ -88,15 +135,17 @@ class ProfileViewController: UICollectionViewController, UICollectionViewDelegat
         alertLogout.addAction(cancelAction)
         
         present(alertLogout, animated: true)
-        
-        
+
     }
     
     //MARK: - CollectionView Functions
     
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: reusableProfileHeaderId, for: indexPath) as! ProfileHeaderView
-        header.viewModel = ProfileHeaderViewModel(user)
+        header.viewModel                = ProfileHeaderViewModel(user)
+        header.actionEditProfile        = self.actionEditProfile
+        header.actionFollowProfile      = self.actionFollowProfile
+        header.actionUnfollowProfile    = self.actionUnfollowProfile
         return header
     }
     

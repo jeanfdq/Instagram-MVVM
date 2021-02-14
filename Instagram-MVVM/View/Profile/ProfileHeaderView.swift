@@ -6,6 +6,7 @@
 //
 
 import SDWebImage
+import Loaf
 
 class ProfileHeaderView: UICollectionReusableView {
     
@@ -35,21 +36,19 @@ class ProfileHeaderView: UICollectionReusableView {
     let quantityPosts:UILabel = {
         let posts = UILabel()
         posts.textAlignment = .center
-        posts.setTitleAttributeswith(firstTitle: "15\n", firstColor: .black, sizeFirstFont: 14, isfirsBold: true, secondTitle: "Posts", secondColor: .darkGray, sizeSecondFont: 14, isSecondBold: false)
+        posts.setTitleAttributeswith(firstTitle: "0\n", firstColor: .black, sizeFirstFont: 14, isfirsBold: true, secondTitle: "Posts", secondColor: .darkGray, sizeSecondFont: 14, isSecondBold: false)
         return posts
     }()
     
     let quantityFollowers:UILabel = {
         let followers = UILabel()
         followers.textAlignment = .center
-        followers.setTitleAttributeswith(firstTitle: "15\n", firstColor: .black, sizeFirstFont: 14, isfirsBold: true, secondTitle: "Followers", secondColor: .darkGray, sizeSecondFont: 14, isSecondBold: false)
         return followers
     }()
     
-    let quantityFollowing:UILabel = {
+    lazy var quantityFollowing:UILabel = {
         let following = UILabel()
         following.textAlignment = .center
-        following.setTitleAttributeswith(firstTitle: "15\n", firstColor: .black, sizeFirstFont: 14, isfirsBold: true, secondTitle: "Following", secondColor: .darkGray, sizeSecondFont: 14, isSecondBold: false)
         return following
     }()
     
@@ -75,9 +74,17 @@ class ProfileHeaderView: UICollectionReusableView {
         return line
     }()
     
+    var actionEditProfile:(()->Void)?
+    var actionFollowProfile:(()->Void)?
+    var actionUnfollowProfile:(()->Void)?
+    
     // MARK: - LifeCycle
+    
+    deinit { NotificationCenter.default.removeObserver(self) }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.getQuantitiesHeader), name: .NCD_UserQtdHeaderProfile, object: nil)
         
         addSubViews(profileImage, fullNameLabel, containerQuantities, editPofileBtn, separatorLine)
         profileImage.applyViewConstraints(leading: leadingAnchor, top: topAnchor, size: .init(width: 80, height: 80), value: .init(top: 10, left: 10, bottom: 0, right: 0))
@@ -97,9 +104,44 @@ class ProfileHeaderView: UICollectionReusableView {
         editPofileBtn.setTitle(viewModel.profileBtnTitle, for: .normal)
         editPofileBtn.setTitleColor(viewModel.profileBtnTextColor, for: .normal)
         editPofileBtn.backgroundColor = viewModel.profileBtnBackground
+        editPofileBtn.addTapGesture { [unowned self] in
+            if viewModel.isCurrentUser {
+                self.actionEditProfile?()
+            } else if viewModel.isFollowed {
+                self.actionUnfollowProfile?()
+            } else {
+                self.actionFollowProfile?()
+            }
+            
+        }
         
         profileImage.sd_setImage(with: URL(string: viewModel.profileImage))
         fullNameLabel.text = viewModel.fullName
+        
+    }
+    
+    @objc fileprivate func getQuantitiesHeader(){
+        
+        if let userId = viewModel?.userId {
+            
+            viewModel?.fetchFollowing(userId, completion: { listOfFollowing in
+                self.setQuantitiesFollowingLabel(listOfFollowing.count)
+            })
+            
+            viewModel?.fetchFollowers(userId, completion: { listOfFollowers in
+                self.setQuantitiesFollowersLabel(listOfFollowers.count)
+            })
+            
+        }
+    
+    }
+    
+    fileprivate func setQuantitiesFollowingLabel(_ qtd:Int){
+        quantityFollowing.setTitleAttributeswith(firstTitle: "\(qtd)\n", firstColor: .black, sizeFirstFont: 14, isfirsBold: true, secondTitle: "Following", secondColor: .darkGray, sizeSecondFont: 14, isSecondBold: false)
+    }
+    
+    fileprivate func setQuantitiesFollowersLabel(_ qtd:Int){
+        quantityFollowers.setTitleAttributeswith(firstTitle: "\(qtd)\n", firstColor: .black, sizeFirstFont: 14, isfirsBold: true, secondTitle: "Followers", secondColor: .darkGray, sizeSecondFont: 14, isSecondBold: false)
     }
     
 }

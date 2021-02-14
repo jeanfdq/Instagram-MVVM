@@ -29,7 +29,7 @@ class MainViewController: UITabBarController {
         NotificationCenter.default.removeObserver(self)
     }
     
-    fileprivate func setupVireControllers(with user:User) {
+    fileprivate func setupViewControllers(with user:User) {
         
         let feed = FeedViewController(collectionViewLayout: UICollectionViewFlowLayout()).setTemplateNavigationController(FactoryTabBarIcons.home())
         
@@ -46,6 +46,7 @@ class MainViewController: UITabBarController {
     }
     
     @objc fileprivate func verifyUserLogged() {
+  
         DispatchQueue.main.async {[weak self] in
             if !AuthService.shared.isUserLogged {
                 
@@ -63,16 +64,16 @@ class MainViewController: UITabBarController {
     fileprivate func fetchUser() {
         
         let progress = Progress.show(view)
-        
+      
         DispatchQueue.main.async {
             UserService.fetchUser { [weak self] (result) in
                 switch result {
                 case .failure(let err):
                     self?.showLoafError(message: err.localizedDescription)
-                    
+
                 case .success(let user):
                     guard let user = user else {return}
-                    self?.setupVireControllers(with: user)
+                    self?.setupViewControllers(with: user)
                 }
                 progress.dismiss()
             }

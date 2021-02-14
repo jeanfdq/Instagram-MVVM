@@ -7,7 +7,9 @@
 
 import Foundation
 
-let COLLECTION_USERS        = FirebaseInstances.db().collection("users")
-let COLLECTION_FOLLOWING    = FirebaseInstances.db().collection("following")
-let COLLECTION_FOLLOWERS    = FirebaseInstances.db().collection("followers")
-let PHOTO_PATH_STORAGE      = "profile_photos"
+let COLLECTION_USERS            = FirebaseInstances.db().collection("users")
+let COLLECTION_FOLLOWING        = FirebaseInstances.db().collection("following")
+let COLLECTION_FOLLOWERS        = FirebaseInstances.db().collection("followers")
+let COLLECTION_USER_FOLLOWING   = "user-following"
+let COLLECTION_USER_FOLLOWERS   = "user-followers"
+let PHOTO_PATH_STORAGE          = "profile_photos"

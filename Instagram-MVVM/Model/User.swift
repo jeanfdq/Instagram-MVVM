@@ -16,9 +16,14 @@ struct User:Codable {
     let userName:String
     let userSearch:String
     
+    //There're not in firebase struct
+    var followed:Bool? = false
+    
     static func dictionaryToModel(dictionary:[String:Any]) -> Self{
         let model:User? = dictionary.toData()?.toModel()
         return model ?? User(id: "", profileImage: "", email: "", fullName: "", userName: "", userSearch:"")
     }
+    
+    
     
 }

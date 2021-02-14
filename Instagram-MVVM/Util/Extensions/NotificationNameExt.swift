@@ -9,4 +9,5 @@ import Foundation
 
 extension Notification.Name {
     static let NCD_UserLogout = Notification.Name(rawValue: "verifyUserLogged")
+    static let NCD_UserQtdHeaderProfile = Notification.Name(rawValue: "verifyUserQtdFollowing")
 }
