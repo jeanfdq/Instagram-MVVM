@@ -43,18 +43,8 @@ class UserService: NSObject {
                 guard let snapshot = snapshot else {return}
                 
                 let listOfUsers = snapshot.documents.map { User.dictionaryToModel(dictionary: $0.data()) }
-                var listOfUserWithoutCurrentUser = listOfUsers.filter { $0.id != userId}
-
-                self.fetchAllFollowing(userId) { listOfFollowing in
-                    
-                    
-                    for index in (0 ..< listOfUserWithoutCurrentUser.count) {
-                        listOfUserWithoutCurrentUser[index].followed = listOfFollowing.contains(listOfUserWithoutCurrentUser[index].id)
-                    }
-                    
-                    completion(.success(listOfUserWithoutCurrentUser))
-                    
-                }
+                let listOfUserWithoutCurrentUser = listOfUsers.filter { $0.id != userId}
+                completion(.success(listOfUserWithoutCurrentUser))
                 
             }
             
@@ -111,30 +101,61 @@ class UserService: NSObject {
         
     }
     
-    static func fetchAllFollowing(_ userId:String, completion:@escaping([String])->Void) {
+    static func fetchUserStats(_ userId:String, completion:@escaping(UserStats)->Void){
         
         COLLECTION_FOLLOWING.document(userId).collection(COLLECTION_USER_FOLLOWING).getDocuments { (snapshot, error) in
             
-            var listUserId = [String]()
+            let following = snapshot?.documents.compactMap{ $0.documentID }.count ?? 0
             
-            if let snapshot = snapshot {
-                listUserId = snapshot.documents.compactMap{ $0.documentID }
+            COLLECTION_FOLLOWERS.document(userId).collection(COLLECTION_USER_FOLLOWERS).getDocuments { (snapshot, error) in
+
+                let followers = snapshot?.documents.compactMap{ $0.documentID }.count ?? 0
+                
+                completion( UserStats(followers: followers, following: following, posts: 0))
             }
-            completion(listUserId)
             
         }
+        
     }
     
-    static func fetchAllFollowers(_ userId:String, completion:@escaping([String])->Void) {
+    
+//    static func fetchAllFollowing(_ userId:String, completion:@escaping([String])->Void) {
+//
+//        COLLECTION_FOLLOWING.document(userId).collection(COLLECTION_USER_FOLLOWING).getDocuments { (snapshot, error) in
+//
+//            var listUserId = [String]()
+//
+//            if let snapshot = snapshot {
+//                listUserId = snapshot.documents.compactMap{ $0.documentID }
+//            }
+//            completion(listUserId)
+//
+//        }
+//    }
+//
+//    static func fetchAllFollowers(_ userId:String, completion:@escaping([String])->Void) {
+//
+//        COLLECTION_FOLLOWERS.document(userId).collection(COLLECTION_USER_FOLLOWERS).getDocuments { (snapshot, error) in
+//            var listUserId = [String]()
+//
+//            if let snapshot = snapshot {
+//                listUserId = snapshot.documents.compactMap{ $0.documentID }
+//            }
+//            completion(listUserId)
+//        }
+//    }
+    
+    static func checkIfUserIsFollowed(_ userId:String, completion:@escaping(Bool)->Void) {
         
-        COLLECTION_FOLLOWERS.document(userId).collection(COLLECTION_USER_FOLLOWERS).getDocuments { (snapshot, error) in
-            var listUserId = [String]()
+        guard let currentUserId = AuthService.shared.getCurrentUserId() else {return}
+        COLLECTION_FOLLOWING.document(currentUserId).collection(COLLECTION_USER_FOLLOWING).document(userId).getDocument { (snapshot, error) in
             
-            if let snapshot = snapshot {
-                listUserId = snapshot.documents.compactMap{ $0.documentID }
-            }
-            completion(listUserId)
+            let isFollowed = snapshot?.exists ?? false
+            completion(isFollowed)
+            
         }
+        
+        
     }
     
 }

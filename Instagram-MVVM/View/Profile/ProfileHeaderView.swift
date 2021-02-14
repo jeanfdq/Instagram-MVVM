@@ -80,12 +80,9 @@ class ProfileHeaderView: UICollectionReusableView {
     
     // MARK: - LifeCycle
     
-    deinit { NotificationCenter.default.removeObserver(self) }
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.getQuantitiesHeader), name: .NCD_UserQtdHeaderProfile, object: nil)
-        
+
         addSubViews(profileImage, fullNameLabel, containerQuantities, editPofileBtn, separatorLine)
         profileImage.applyViewConstraints(leading: leadingAnchor, top: topAnchor, size: .init(width: 80, height: 80), value: .init(top: 10, left: 10, bottom: 0, right: 0))
         fullNameLabel.applyViewConstraints(leading: profileImage.leadingAnchor, top: profileImage.bottomAnchor, trailing: trailingAnchor, value: .init(top: 10, left: 0, bottom: 0, right: 5))
@@ -118,22 +115,9 @@ class ProfileHeaderView: UICollectionReusableView {
         profileImage.sd_setImage(with: URL(string: viewModel.profileImage))
         fullNameLabel.text = viewModel.fullName
         
-    }
-    
-    @objc fileprivate func getQuantitiesHeader(){
+        setQuantitiesFollowingLabel(viewModel.numberOfFollowing)
+        setQuantitiesFollowersLabel(viewModel.numberOfFollowers)
         
-        if let userId = viewModel?.userId {
-            
-            viewModel?.fetchFollowing(userId, completion: { listOfFollowing in
-                self.setQuantitiesFollowingLabel(listOfFollowing.count)
-            })
-            
-            viewModel?.fetchFollowers(userId, completion: { listOfFollowers in
-                self.setQuantitiesFollowersLabel(listOfFollowers.count)
-            })
-            
-        }
-    
     }
     
     fileprivate func setQuantitiesFollowingLabel(_ qtd:Int){

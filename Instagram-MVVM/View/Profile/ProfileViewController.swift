@@ -42,9 +42,6 @@ class ProfileViewController: UICollectionViewController, UICollectionViewDelegat
         return logout
     }()
     
-    var setUserToFollowed:((String)->Void)?
-    var setUserToUnFollowed:((String)->Void)?
-    
     // MARK: - LifeCycle
     
     init(_ user:User) {
@@ -60,11 +57,14 @@ class ProfileViewController: UICollectionViewController, UICollectionViewDelegat
         super.viewDidLoad()
         setupView()
         setupCollectionView()
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        NotificationCenter.default.post(name: .NCD_UserQtdHeaderProfile, object: nil)
+        getUserStas()
+        checkIfUserIsFollwed()
+        
     }
     
     // MARK: - functions
@@ -81,6 +81,20 @@ class ProfileViewController: UICollectionViewController, UICollectionViewDelegat
         collectionView.register(ProfileCell.self, forCellWithReuseIdentifier: reusableProfileCellId)
     }
     
+    fileprivate func getUserStas() {
+        UserService.fetchUserStats(user.id) { [weak self] stats in
+            self?.user.stats = stats
+            self?.collectionView.reloadData()
+        }
+    }
+    
+    fileprivate func checkIfUserIsFollwed() {
+        UserService.checkIfUserIsFollowed(user.id) { [weak self] isFollowed in
+            self?.user.followed = isFollowed
+            self?.collectionView.reloadData()
+        }
+    }
+    
     fileprivate func actionEditProfile() {
       
     }
@@ -90,13 +104,7 @@ class ProfileViewController: UICollectionViewController, UICollectionViewDelegat
         UserService.follow(user.id) { [weak self] result in
             switch result {
             case .failure(let err): self?.showLoafError(message: err.localizedDescription)
-            case .success():
-                if let user = self?.user {
-                    self?.user.followed = true
-                    self?.setUserToFollowed?(user.id)
-                    self?.collectionView.reloadData()
-                }
-                
+            case .success(): self?.checkIfUserIsFollwed()
             }
             progress.dismiss()
         }
@@ -108,12 +116,7 @@ class ProfileViewController: UICollectionViewController, UICollectionViewDelegat
         UserService.unfollow(user.id) { [weak self] result in
             switch result {
             case .failure(let err): self?.showLoafError(message: err.localizedDescription)
-            case .success():
-                if let user = self?.user {
-                    self?.user.followed = false
-                    self?.setUserToUnFollowed?(user.id)
-                    self?.collectionView.reloadData()
-                }
+            case .success(): self?.checkIfUserIsFollwed()
                 
             }
             progress.dismiss()

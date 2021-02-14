@@ -35,8 +35,16 @@ class ProfileHeaderViewModel: NSObject {
         return user.followed ?? false
     }
     
+    var numberOfFollowers:Int {
+        return user.stats?.followers ?? 0
+    }
+    
+    var numberOfFollowing:Int {
+        return user.stats?.following ?? 0
+    }
+    
     var profileBtnTitle:String {
-        return isCurrentUser ? "Edit Profile" : user.followed ?? false ? "Unfollow" : "Follow"
+        return isCurrentUser ? "Edit Profile" : isFollowed ? "Unfollow" : "Follow"
     }
     
     var profileBtnBackground:UIColor {
@@ -45,19 +53,6 @@ class ProfileHeaderViewModel: NSObject {
     
     var profileBtnTextColor:UIColor {
         return isCurrentUser ? .darkGray : .white
-    }
-    
-    func fetchFollowing(_ userId:String, completion:@escaping([String])->Void) {
-        
-        UserService.fetchAllFollowing(userId) { listOfFollowing in
-            completion(listOfFollowing)
-        }
-    }
-    
-    func fetchFollowers(_ userId:String, completion:@escaping([String])->Void) {
-        UserService.fetchAllFollowers(userId) { listOfFollowers in
-            completion(listOfFollowers)
-        }
     }
     
 }

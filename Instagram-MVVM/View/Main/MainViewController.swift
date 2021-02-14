@@ -11,13 +11,9 @@ class MainViewController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.delegate = self
         view.backgroundColor = .white
         NotificationCenter.default.addObserver(self, selector: #selector(self.verifyUserLogged), name: .NCD_UserLogout, object: nil)
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -25,9 +21,7 @@ class MainViewController: UITabBarController {
         verifyUserLogged()
     }
     
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
+    deinit { NotificationCenter.default.removeObserver(self) }
     
     fileprivate func setupViewControllers(with user:User) {
         
@@ -78,6 +72,16 @@ class MainViewController: UITabBarController {
                 progress.dismiss()
             }
         }
+    }
+    
+}
+
+extension MainViewController: UITabBarControllerDelegate {
+    
+    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
+        let viewControllerIndex = viewControllers?.firstIndex(of: viewController)
+        
+        return true
     }
     
 }

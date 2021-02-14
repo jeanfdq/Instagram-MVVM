@@ -27,7 +27,7 @@ class SearchViewController: UICollectionViewController, UICollectionViewDelegate
             guard let userSelected = userSelected else {return}
             let profileVC = ProfileViewController(userSelected)
             profileVC.isDisplayMode = true
-            profileVC.setUserToFollowed = self.setUserToFollowed
+            //profileVC.setUserToFollowed = self.setUserToFollowed
             self.navigationController?.pushViewController(profileVC, animated: true)
         }
     }
@@ -49,8 +49,6 @@ class SearchViewController: UICollectionViewController, UICollectionViewDelegate
     
     
     // MARK: - Lifecycle
-    
-    deinit { NotificationCenter.default.removeObserver(self) }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -83,11 +81,11 @@ class SearchViewController: UICollectionViewController, UICollectionViewDelegate
         }
     }
     
-    fileprivate func setUserToFollowed(_ userId:String){
-        for index in (0 ..< filteredListUsers.count) where filteredListUsers[index].id == userId {
-            filteredListUsers[index].followed = true
-        }
-    }
+//    fileprivate func setUserToFollowed(_ userId:String){
+//        for index in (0 ..< filteredListUsers.count) where filteredListUsers[index].id == userId {
+//            filteredListUsers[index].followed = true
+//        }
+//    }
     
     // MARK: - CollectionView Events
     
