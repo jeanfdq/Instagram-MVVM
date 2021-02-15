@@ -5,7 +5,7 @@
 //  Created by Jean Paul Borges Manzini on 07/02/21.
 //
 
-import UIKit
+import YPImagePicker
 
 class MainViewController: UITabBarController {
     
@@ -74,6 +74,21 @@ class MainViewController: UITabBarController {
         }
     }
     
+    fileprivate func didFinishPickingMedia(_ picker:YPImagePicker){
+        
+        picker.didFinishPicking { (items, _) in
+            
+            picker.dismiss(animated: true) {
+                
+                guard let selectedImage = items.singlePhoto?.image else {return}
+                
+                
+            }
+            
+        }
+        
+    }
+    
 }
 
 extension MainViewController: UITabBarControllerDelegate {
@@ -81,6 +96,23 @@ extension MainViewController: UITabBarControllerDelegate {
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
         let viewControllerIndex = viewControllers?.firstIndex(of: viewController)
         
+        if viewControllerIndex == 2 { // selector Images to post
+            
+            var config = YPImagePickerConfiguration()
+            config.library.mediaType = .photo
+            config.shouldSaveNewPicturesToAlbum = false
+            config.startOnScreen = .library
+            config.screens = [.library]
+            config.hidesStatusBar = false
+            config.hidesBottomBar = false
+            config.library.maxNumberOfItems = 1
+            
+            let picker = YPImagePicker(configuration: config)
+            picker.modalPresentationStyle = .fullScreen
+            self.present(picker, animated: true)
+            self.didFinishPickingMedia(picker)
+            
+        }
         return true
     }
     
