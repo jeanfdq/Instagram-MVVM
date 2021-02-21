@@ -74,21 +74,6 @@ class MainViewController: UITabBarController {
         }
     }
     
-    fileprivate func didFinishPickingMedia(_ picker:YPImagePicker){
-        
-        picker.didFinishPicking { (items, _) in
-            
-            picker.dismiss(animated: true) {
-                
-                guard let selectedImage = items.singlePhoto?.image else {return}
-                
-                
-            }
-            
-        }
-        
-    }
-    
 }
 
 extension MainViewController: UITabBarControllerDelegate {
@@ -109,11 +94,35 @@ extension MainViewController: UITabBarControllerDelegate {
             
             let picker = YPImagePicker(configuration: config)
             picker.modalPresentationStyle = .fullScreen
-            self.present(picker, animated: true)
+            self.present(picker, animated: false)
             self.didFinishPickingMedia(picker)
             
         }
         return true
     }
     
+}
+
+extension MainViewController {
+    
+    fileprivate func didFinishPickingMedia(_ picker:YPImagePicker){
+        
+        picker.didFinishPicking { (items, _) in
+            
+            picker.dismiss(animated: false) {
+                
+                guard let selectedImage = items.singlePhoto?.image else {return}
+                
+                let uploadVC = UploadPostController()
+                uploadVC.previewImageView.image = selectedImage
+                let nav = UINavigationController(rootViewController: uploadVC)
+                nav.modalPresentationStyle = .fullScreen
+                self.present(nav, animated: false)
+                
+                
+            }
+            
+        }
+        
+    }
 }
