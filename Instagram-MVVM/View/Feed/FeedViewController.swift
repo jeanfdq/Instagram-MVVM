@@ -35,6 +35,10 @@ class FeedViewController: UICollectionViewController {
     
     fileprivate func setupUI() {
         navigationItem.title = "Feed"
+        
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(self.fetchPosts), for: .valueChanged)
+        collectionView.refreshControl = refreshControl
     }
     
     fileprivate func setupCollectionView() {
@@ -43,9 +47,11 @@ class FeedViewController: UICollectionViewController {
         collectionView.register(FeedCell.self, forCellWithReuseIdentifier: reusableCellId)
     }
     
-    fileprivate func fetchPosts(){
+    @objc fileprivate func fetchPosts(){
+        listOfPosts.removeAll()
         DBService.fetchPosts { [weak self] posts in
             self?.listOfPosts = posts
+            self?.collectionView.refreshControl?.endRefreshing()
             self?.collectionView.reloadData()
         }
     }

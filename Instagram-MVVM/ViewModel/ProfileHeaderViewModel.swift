@@ -43,6 +43,10 @@ class ProfileHeaderViewModel: NSObject {
         return user.stats?.following ?? 0
     }
     
+    var numberOfPosts:Int {
+        return user.stats?.posts ?? 0
+    }
+    
     var profileBtnTitle:String {
         return isCurrentUser ? "Edit Profile" : isFollowed ? "Unfollow" : "Follow"
     }

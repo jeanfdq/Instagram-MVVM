@@ -36,7 +36,6 @@ class ProfileHeaderView: UICollectionReusableView {
     let quantityPosts:UILabel = {
         let posts = UILabel()
         posts.textAlignment = .center
-        posts.setTitleAttributeswith(firstTitle: "0\n", firstColor: .black, sizeFirstFont: 14, isfirsBold: true, secondTitle: "Posts", secondColor: .darkGray, sizeSecondFont: 14, isSecondBold: false)
         return posts
     }()
     
@@ -117,6 +116,7 @@ class ProfileHeaderView: UICollectionReusableView {
         
         setQuantitiesFollowingLabel(viewModel.numberOfFollowing)
         setQuantitiesFollowersLabel(viewModel.numberOfFollowers)
+        setQuantitiesPostsLabel(viewModel.numberOfPosts)
         
     }
     
@@ -126,6 +126,11 @@ class ProfileHeaderView: UICollectionReusableView {
     
     fileprivate func setQuantitiesFollowersLabel(_ qtd:Int){
         quantityFollowers.setTitleAttributeswith(firstTitle: "\(qtd)\n", firstColor: .black, sizeFirstFont: 14, isfirsBold: true, secondTitle: "Followers", secondColor: .darkGray, sizeSecondFont: 14, isSecondBold: false)
+    }
+    
+    fileprivate func setQuantitiesPostsLabel(_ qtd:Int){
+        
+        quantityPosts.setTitleAttributeswith(firstTitle: "\(qtd)\n", firstColor: .black, sizeFirstFont: 14, isfirsBold: true, secondTitle: "Posts", secondColor: .darkGray, sizeSecondFont: 14, isSecondBold: false)
     }
     
 }

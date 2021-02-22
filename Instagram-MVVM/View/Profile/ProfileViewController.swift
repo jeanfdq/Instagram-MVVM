@@ -12,6 +12,7 @@ class ProfileViewController: UICollectionViewController, UICollectionViewDelegat
     // MARK: - Properties
     
     fileprivate var user:User
+    fileprivate var myPosts = [Post]()
     
     open var isDisplayMode:Bool = false
     
@@ -63,6 +64,7 @@ class ProfileViewController: UICollectionViewController, UICollectionViewDelegat
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         callSetupProfile()
+        fetchMyPosts()
     }
     
     // MARK: - functions
@@ -77,6 +79,13 @@ class ProfileViewController: UICollectionViewController, UICollectionViewDelegat
         collectionView.backgroundColor = .white
         collectionView.register(ProfileHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: reusableProfileHeaderId)
         collectionView.register(ProfileCell.self, forCellWithReuseIdentifier: reusableProfileCellId)
+    }
+    
+    fileprivate func fetchMyPosts() {
+        UserService.fetchPosts(withUser: user.id) { [weak self] posts in
+            self?.myPosts = posts
+            self?.collectionView.reloadData()
+        }
     }
     
     fileprivate func callSetupProfile(){
@@ -160,11 +169,12 @@ class ProfileViewController: UICollectionViewController, UICollectionViewDelegat
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 6
+        return myPosts.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reusableProfileCellId, for: indexPath) as! ProfileCell
+        cell.postViewModel = PostViewModel(myPosts[indexPath.item])
         return cell
     }
     

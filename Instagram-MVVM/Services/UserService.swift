@@ -108,7 +108,12 @@ class UserService: NSObject {
 
                 let followers = snapshot?.documents.compactMap{ $0.documentID }.count ?? 0
                 
-                completion( UserStats(followers: followers, following: following, posts: 0))
+                self.fetchPosts(withUser: userId) { posts in
+                    
+                    completion( UserStats(followers: followers, following: following, posts: posts.count))
+                    
+                }
+                
             }
             
         }
@@ -125,6 +130,23 @@ class UserService: NSObject {
             
         }
         
+        
+    }
+    
+    static func fetchPosts(withUser userId:String, completion:@escaping([Post])->Void){
+        
+        var listOfPosts = [Post]()
+        
+        let query = COLLECTION_POSTS.whereField("ownerId", isEqualTo: userId)
+        query.getDocuments { (snapshots, error) in
+            
+            _ = snapshots?.documents.compactMap{ item in
+                listOfPosts.append(Post(uuid: item.documentID, dictionary: item.data()))
+            }
+            
+            completion(listOfPosts)
+            
+        }
         
     }
     
