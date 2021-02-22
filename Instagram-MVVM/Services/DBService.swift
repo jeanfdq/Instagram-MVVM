@@ -5,7 +5,7 @@
 //  Created by Jean Paul Borges Manzini on 07/02/21.
 //
 
-import Foundation
+import UIKit
 import FirebaseFirestore
 
 enum dbError:String, Error {
@@ -13,11 +13,15 @@ enum dbError:String, Error {
     case createUserError = "Erro ao criar o usuário"
     case creteUserEmailError = "E-mail já cadastrado."
     case insertProfilePhotoError = "Erro ao inserir a foto no Storange"
+    case insertPostPhotoError = "Erro ao inserir a foto do post no storage"
+    case createPostError = "Erro ao criar o post"
 }
 
 class DBService: NSObject {
     
-    static func createUser(_ viewModel:SignUpViewModel, completion:@escaping (Result<Void,dbError>)->Void){
+    typealias completionHandler =  (Result<Void,dbError>)->Void
+    
+    static func createUser(_ viewModel:SignUpViewModel, completion:@escaping completionHandler){
         
         
         if let profile = viewModel.profileImage {
@@ -40,7 +44,7 @@ class DBService: NSObject {
                             if let userId = AuthService.shared.getCurrentUserId() {
                                 
                                 //Primeiro vamos inserir a foto no storage
-                                StorageService.shared.addPhotoStorage(profile) { result in
+                                StorageService.shared.addPhotoStorage(profile, PROFILE_PHOTO_PATH_STORAGE) { result in
                                     
                                     switch result {
                                     case .failure(_ ): completion(.failure(.insertProfilePhotoError))
@@ -88,5 +92,49 @@ class DBService: NSObject {
             completion(.failure(.createUserError))
         }
         
+    }
+    
+    static func createPost(_ user:User, _ selectedImage:UIImage, _ caption:String, completion:@escaping completionHandler) {
+        
+        StorageService.shared.addPhotoStorage(selectedImage, POSTS_PHOTO_PATH_STORAGE) { result in
+            
+            switch result {
+            case .failure(_ ): completion(.failure(.insertPostPhotoError))
+            case .success(let url):
+                
+                let uuid = UUID().uuidString
+                
+                let dictionary = ["uuid":uuid, "imageURL":url, "caption":caption, "createdDate": Date().getDateToString("EEEE, MMM d, yyyy"), "like":0, "rating":0, "ownerId":AuthService.shared.getCurrentUserId() ?? "","ownerUserName":user.userName, "ownerProfileUrl":user.profileImage, "timestamp":Timestamp(date: Date())] as [String : Any]
+                
+                COLLECTION_POSTS.document(uuid).setData(dictionary) { error in
+                    
+                    if let _ = error {
+                        completion(.failure(.createPostError))
+                    } else {
+                        completion(.success(()))
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+    }
+    
+    static func fetchPosts(completion:@escaping([Post])->Void) {
+        
+        COLLECTION_POSTS.order(by: "timestamp", descending: true).getDocuments { (snapshot, error) in
+            
+            var listOfPosts = [Post]()
+            
+            _ = snapshot?.documents.compactMap{ item in
+                
+                listOfPosts.append(Post(uuid: item.documentID, dictionary: item.data()))
+                
+            }
+            
+            completion(listOfPosts)
+        }
     }
 }

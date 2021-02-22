@@ -27,7 +27,7 @@ class ImputTextView: UITextView {
         NotificationCenter.default.addObserver(self, selector: #selector(self.handleTextDidChange), name: UITextView.textDidChangeNotification, object: nil)
         
         addSubview(placeHolder)
-        placeHolder.applyViewConstraints(leading: leadingAnchor, centerY: centerYAnchor, size: .zero, value: .zero)
+        placeHolder.applyViewConstraints(leading: leadingAnchor, top: topAnchor, size: .zero, value: .init(top: 6, left: 6, bottom: 0, right: 0))
         
     }
     

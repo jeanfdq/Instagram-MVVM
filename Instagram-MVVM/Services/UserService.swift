@@ -11,23 +11,20 @@ class UserService: NSObject {
     
     // MARK: - Properties
     
-    static func fetchUser(completion:@escaping(Result<User?,Error>)->Void) {
-        if let userId = AuthService.shared.getCurrentUserId() {
+    static func fetchUser(_ userId:String = AuthService.shared.getCurrentUserId() ?? "", completion:@escaping(Result<User?,Error>)->Void) {
             
-            COLLECTION_USERS.document(userId)
-                .getDocument { (snapshot, error) in
+        COLLECTION_USERS.document(userId)
+            .getDocument { (snapshot, error) in
+                
+                if let error = error {
+                    completion(.failure(error))
+                } else {
                     
-                    if let error = error {
-                        completion(.failure(error))
-                    } else {
-                        
-                        let model:User? = snapshot?.data()?.toData()?.toModel()
-                        completion(.success(model))
-                        
-                    }
+                    let model:User? = snapshot?.data()?.toData()?.toModel()
+                    completion(.success(model))
                     
                 }
-        }
+            }
         
     }
     
@@ -117,33 +114,6 @@ class UserService: NSObject {
         }
         
     }
-    
-    
-//    static func fetchAllFollowing(_ userId:String, completion:@escaping([String])->Void) {
-//
-//        COLLECTION_FOLLOWING.document(userId).collection(COLLECTION_USER_FOLLOWING).getDocuments { (snapshot, error) in
-//
-//            var listUserId = [String]()
-//
-//            if let snapshot = snapshot {
-//                listUserId = snapshot.documents.compactMap{ $0.documentID }
-//            }
-//            completion(listUserId)
-//
-//        }
-//    }
-//
-//    static func fetchAllFollowers(_ userId:String, completion:@escaping([String])->Void) {
-//
-//        COLLECTION_FOLLOWERS.document(userId).collection(COLLECTION_USER_FOLLOWERS).getDocuments { (snapshot, error) in
-//            var listUserId = [String]()
-//
-//            if let snapshot = snapshot {
-//                listUserId = snapshot.documents.compactMap{ $0.documentID }
-//            }
-//            completion(listUserId)
-//        }
-//    }
     
     static func checkIfUserIsFollowed(_ userId:String, completion:@escaping(Bool)->Void) {
         

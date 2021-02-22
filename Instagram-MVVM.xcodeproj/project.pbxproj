@@ -52,6 +52,9 @@
 		8CB38FC525D35BCC00262FF1 /* ProfileHeaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB38FC425D35BCC00262FF1 /* ProfileHeaderViewModel.swift */; };
 		A914692F25E2BAF10021CBA9 /* UploadPostController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A914692E25E2BAF10021CBA9 /* UploadPostController.swift */; };
 		A914693225E2C8E00021CBA9 /* ImputTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A914693125E2C8E00021CBA9 /* ImputTextView.swift */; };
+		A914693525E2D9650021CBA9 /* PostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A914693425E2D9650021CBA9 /* PostViewModel.swift */; };
+		A914693825E309E10021CBA9 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = A914693725E309E10021CBA9 /* Post.swift */; };
+		A914693B25E310400021CBA9 /* DateExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = A914693A25E310400021CBA9 /* DateExt.swift */; };
 		A963256025D8A6CF006C4477 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A963255F25D8A6CF006C4477 /* GoogleService-Info.plist */; };
 		A963256425D8C7CA006C4477 /* SearchUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A963256325D8C7CA006C4477 /* SearchUserCell.swift */; };
 		A963256725D8C93A006C4477 /* SearchUserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A963256625D8C93A006C4477 /* SearchUserViewModel.swift */; };
@@ -109,6 +112,9 @@
 		98E80329E600E182120ED09E /* Pods_Instagram_MVVM.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Instagram_MVVM.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A914692E25E2BAF10021CBA9 /* UploadPostController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadPostController.swift; sourceTree = "<group>"; };
 		A914693125E2C8E00021CBA9 /* ImputTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImputTextView.swift; sourceTree = "<group>"; };
+		A914693425E2D9650021CBA9 /* PostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewModel.swift; sourceTree = "<group>"; };
+		A914693725E309E10021CBA9 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		A914693A25E310400021CBA9 /* DateExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExt.swift; sourceTree = "<group>"; };
 		A963255F25D8A6CF006C4477 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A963256325D8C7CA006C4477 /* SearchUserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUserCell.swift; sourceTree = "<group>"; };
 		A963256625D8C93A006C4477 /* SearchUserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUserViewModel.swift; sourceTree = "<group>"; };
@@ -247,6 +253,7 @@
 				8C4AF44C25D070EE00FF4C99 /* LoginViewModel.swift */,
 				8CB38FC425D35BCC00262FF1 /* ProfileHeaderViewModel.swift */,
 				A963256625D8C93A006C4477 /* SearchUserViewModel.swift */,
+				A914693425E2D9650021CBA9 /* PostViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -255,6 +262,7 @@
 			isa = PBXGroup;
 			children = (
 				8C3C12DD25D2288500881764 /* User.swift */,
+				A914693725E309E10021CBA9 /* Post.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -276,6 +284,7 @@
 				8C3C12E125D22E5E00881764 /* EncodableExt.swift */,
 				8C3C12E425D22E7A00881764 /* DataExt.swift */,
 				8C3C12E725D230F600881764 /* DictionaryExt.swift */,
+				A914693A25E310400021CBA9 /* DateExt.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -473,6 +482,7 @@
 				8C4AF43F25D0439B00FF4C99 /* LoginViewController.swift in Sources */,
 				A914693225E2C8E00021CBA9 /* ImputTextView.swift in Sources */,
 				A914692F25E2BAF10021CBA9 /* UploadPostController.swift in Sources */,
+				A914693825E309E10021CBA9 /* Post.swift in Sources */,
 				8C9DAD8825CFB82A00CE1847 /* SearchViewController.swift in Sources */,
 				8C3C12E825D230F600881764 /* DictionaryExt.swift in Sources */,
 				8C9DADAC25CFC83D00CE1847 /* StringExt.swift in Sources */,
@@ -489,6 +499,7 @@
 				8C9DAD8E25CFB84300CE1847 /* NotificationsViewController.swift in Sources */,
 				8CA4D6CC25D0BC1800208F91 /* NotificationNameExt.swift in Sources */,
 				8C4AF44A25D06F5A00FF4C99 /* SignUpViewModel.swift in Sources */,
+				A914693B25E310400021CBA9 /* DateExt.swift in Sources */,
 				8C9DADB525CFC95300CE1847 /* UIButtonExt.swift in Sources */,
 				8C9DAD8525CFB82100CE1847 /* FeedViewController.swift in Sources */,
 				8C4AF44D25D070EE00FF4C99 /* LoginViewModel.swift in Sources */,
@@ -509,6 +520,7 @@
 				8C9DADA125CFC52300CE1847 /* BindingTextField.swift in Sources */,
 				8CB38FC525D35BCC00262FF1 /* ProfileHeaderViewModel.swift in Sources */,
 				8C9DADAF25CFC8FE00CE1847 /* UIColorExt.swift in Sources */,
+				A914693525E2D9650021CBA9 /* PostViewModel.swift in Sources */,
 				8C9DAD9125CFB84C00CE1847 /* ProfileViewController.swift in Sources */,
 				8C9DAD8B25CFB83600CE1847 /* ImageSelectorViewController.swift in Sources */,
 				8C3C12D725D206D500881764 /* ProfileCell.swift in Sources */,

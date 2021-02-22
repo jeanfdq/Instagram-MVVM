@@ -43,7 +43,8 @@ extension UIViewController {
     }
     
     func showLoading() -> JGProgressHUD{
-        let progress = JGProgressHUD()
+        view.endEditing(true)
+        let progress = JGProgressHUD(style: .dark)
         progress.textLabel.text = "aguarde..."
         progress.show(in: self.view, animated: true)
         return progress

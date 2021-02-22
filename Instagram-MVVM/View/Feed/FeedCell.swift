@@ -5,11 +5,18 @@
 //  Created by Jean Paul Borges Manzini on 07/02/21.
 //
 
-import UIKit
+import SDWebImage
 
 class FeedCell: UICollectionViewCell {
     
-    let profilePhotoPost:UIImageView = {
+    var viewModel:PostViewModel? {
+        didSet {
+            guard let viewModel = viewModel else {return}
+            configure(viewModel)
+        }
+    }
+    
+    fileprivate let profilePhotoPost:UIImageView = {
         let photo = UIImageView(image: UIImage(named: "venom-7"))
         photo.backgroundColor = .gray
         photo.setCorner(radius: 15)
@@ -17,7 +24,7 @@ class FeedCell: UICollectionViewCell {
         return photo
     }()
     
-    let profileNamePost:UILabel = {
+    fileprivate let profileNamePost:UILabel = {
         let profileName = UILabel()
         profileName.text = "Teste de Nome"
         profileName.textAlignment = .left
@@ -26,7 +33,7 @@ class FeedCell: UICollectionViewCell {
         return profileName
     }()
     
-    let actionMorePost:UILabel = {
+    fileprivate let actionMorePost:UILabel = {
         let actionMore = UILabel(frame: .init(x: 0, y: 0, width: 60, height: 60))
         actionMore.text = "..."
         actionMore.textAlignment = .right
@@ -36,7 +43,7 @@ class FeedCell: UICollectionViewCell {
         return actionMore
     }()
     
-    lazy var postHeader:UIStackView = {
+    fileprivate lazy var postHeader:UIStackView = {
         let stack = UIStackView(arrangedSubviews: [profilePhotoPost, profileNamePost, actionMorePost])
         stack.axis = .horizontal
         stack.distribution = .fillProportionally
@@ -44,7 +51,7 @@ class FeedCell: UICollectionViewCell {
         return stack
     }()
     
-    let photoPost:UIImageView = {
+    fileprivate let photoPost:UIImageView = {
         let photo = UIImageView(image: UIImage(named: "venom-7"))
         photo.contentMode = .scaleAspectFill
         return photo
@@ -52,27 +59,27 @@ class FeedCell: UICollectionViewCell {
     
     fileprivate let sizeIconsPost:CGFloat = 22
     
-    lazy var likePost:UIImageView = {
+    fileprivate lazy var likePost:UIImageView = {
         let like = UIImageView(image: UIImage(systemName: "heart", withConfiguration: UIImage.SymbolConfiguration(weight: .thin))?.withTintColor(.black, renderingMode: .alwaysOriginal))
         return like
     }()
     
-    lazy var commentPost:UIImageView = {
+    fileprivate lazy var commentPost:UIImageView = {
         let comment = UIImageView(image: UIImage(systemName: "bubble.left", withConfiguration: UIImage.SymbolConfiguration(weight: .thin))?.withTintColor(.black, renderingMode: .alwaysOriginal))
         return comment
     }()
     
-    lazy var sendPost:UIImageView = {
+    fileprivate lazy var sendPost:UIImageView = {
         let send = UIImageView(image: UIImage(systemName: "paperplane", withConfiguration: UIImage.SymbolConfiguration(weight: .thin))?.withTintColor(.black, renderingMode: .alwaysOriginal))
         return send
     }()
     
-    lazy var savePost:UIImageView = {
+    fileprivate lazy var savePost:UIImageView = {
         let save = UIImageView(image: UIImage(systemName: "bookmark", withConfiguration: UIImage.SymbolConfiguration(weight: .thin))?.withTintColor(.black, renderingMode: .alwaysOriginal))
         return save
     }()
     
-    let quantityLike:UILabel = {
+    fileprivate let quantityLike:UILabel = {
         let qtdLike = UILabel()
         qtdLike.textColor = .darkGray
         qtdLike.textAlignment = .left
@@ -81,8 +88,9 @@ class FeedCell: UICollectionViewCell {
         return qtdLike
     }()
     
-    lazy var postBottom:UIView = {
+    fileprivate lazy var postBottom:UIView = {
        let container = UIView()
+        
         container.addSubViews(likePost, commentPost, sendPost, savePost, quantityLike)
         
         likePost.applyViewConstraints(leading: container.leadingAnchor, centerY: container.centerYAnchor, size: .init(width: sizeIconsPost, height: sizeIconsPost), value: .init(top: 0, left: 8, bottom: 0, right: 0))
@@ -101,11 +109,21 @@ class FeedCell: UICollectionViewCell {
         addSubViews(postHeader, photoPost, postBottom)
         postHeader.applyViewConstraints(leading: leadingAnchor, top: topAnchor, trailing: trailingAnchor, size: .zero, value: .init(top: 5, left: 10, bottom: 0, right: 10))
         photoPost.applyViewConstraints(leading: leadingAnchor, top: postHeader.bottomAnchor, trailing: trailingAnchor, bottom: postBottom.topAnchor, value: .init(top: 5, left: 0, bottom: 0, right: 0))
-        postBottom.applyViewConstraints(leading: leadingAnchor, trailing: trailingAnchor, bottom: bottomAnchor, size: .init(width: 0, height: 30), value: .zero)
+        postBottom.applyViewConstraints(leading: leadingAnchor, trailing: trailingAnchor, bottom: bottomAnchor, size: .init(width: 0, height: 50), value: .zero)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    fileprivate func configure(_ viewModel:PostViewModel) {
+        
+        profileNamePost.text = viewModel.userName
+        profilePhotoPost.sd_setImage(with: viewModel.userImageUrl)
+        photoPost.sd_setImage(with: viewModel.imageUrl)
+        
+        quantityLike.text =  "\(viewModel.likes) like\(viewModel.likes <= 1 ? "" : "s")"
+        
     }
     
 }

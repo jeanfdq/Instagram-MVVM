@@ -11,7 +11,13 @@ class UploadPostController: UIViewController {
 
     // MARK: - Properties
     
-    let previewImageView:UIImageView = {
+    var user:User?
+    
+    var selectedImage:UIImage? {
+        didSet { previewImageView.image = selectedImage }
+    }
+    
+    private let previewImageView:UIImageView = {
         let piv = UIImageView()
         piv.clipsToBounds = true
         piv.contentMode = .scaleAspectFill
@@ -63,6 +69,34 @@ class UploadPostController: UIViewController {
     // MARK: - Selectors
     
     @objc fileprivate func sharePost() {
+
+        if captionImage.text.isEmpty {
+            self.showLoafError(message: "Informe o caption do post!")
+        } else if let selectedImage = selectedImage {
+            
+            if let user = user {
+                
+                let progress = showLoading()
+                
+                DBService.createPost(user, selectedImage, captionImage.text) { [unowned self] result in
+                    
+                    switch result {
+                    case .failure(let error): self.showLoafError(message: error.rawValue)
+                    case .success():
+                        NotificationCenter.default.post(name: .NCD_UserPosted, object: nil)
+                        self.dismiss(animated: false)
+                    }
+                    progress.dismiss()
+                }
+                
+            } else {
+                self.showLoafError(message: "Post sem usuário!")
+            }
+            
+        } else {
+            self.showLoafError(message: "Post sem imagem!")
+        }
+        
         
     }
     

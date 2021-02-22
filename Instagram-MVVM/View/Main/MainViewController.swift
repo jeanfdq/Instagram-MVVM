@@ -5,15 +5,15 @@
 //  Created by Jean Paul Borges Manzini on 07/02/21.
 //
 
-import YPImagePicker
+import UIKit
 
 class MainViewController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.delegate = self
         view.backgroundColor = .white
         NotificationCenter.default.addObserver(self, selector: #selector(self.verifyUserLogged), name: .NCD_UserLogout, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.userPostedAndToFeed), name: .NCD_UserPosted, object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -29,7 +29,7 @@ class MainViewController: UITabBarController {
         
         let search = SearchViewController(collectionViewLayout: UICollectionViewFlowLayout()).setTemplateNavigationController(FactoryTabBarIcons.search())
         
-        let imageSelector = ImageSelectorViewController().setTemplateNavigationController(FactoryTabBarIcons.imageSelector())
+        let imageSelector = ImageSelectorViewController(user).setTemplateNavigationController(FactoryTabBarIcons.imageSelector())
         
         let notification = NotificationsViewController().setTemplateNavigationController(FactoryTabBarIcons.notifications())
         
@@ -74,55 +74,8 @@ class MainViewController: UITabBarController {
         }
     }
     
-}
-
-extension MainViewController: UITabBarControllerDelegate {
-    
-    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
-        let viewControllerIndex = viewControllers?.firstIndex(of: viewController)
-        
-        if viewControllerIndex == 2 { // selector Images to post
-            
-            var config = YPImagePickerConfiguration()
-            config.library.mediaType = .photo
-            config.shouldSaveNewPicturesToAlbum = false
-            config.startOnScreen = .library
-            config.screens = [.library]
-            config.hidesStatusBar = false
-            config.hidesBottomBar = false
-            config.library.maxNumberOfItems = 1
-            
-            let picker = YPImagePicker(configuration: config)
-            picker.modalPresentationStyle = .fullScreen
-            self.present(picker, animated: false)
-            self.didFinishPickingMedia(picker)
-            
-        }
-        return true
+    @objc fileprivate func userPostedAndToFeed(){
+        selectedIndex = 0
     }
     
-}
-
-extension MainViewController {
-    
-    fileprivate func didFinishPickingMedia(_ picker:YPImagePicker){
-        
-        picker.didFinishPicking { (items, _) in
-            
-            picker.dismiss(animated: false) {
-                
-                guard let selectedImage = items.singlePhoto?.image else {return}
-                
-                let uploadVC = UploadPostController()
-                uploadVC.previewImageView.image = selectedImage
-                let nav = UINavigationController(rootViewController: uploadVC)
-                nav.modalPresentationStyle = .fullScreen
-                self.present(nav, animated: false)
-                
-                
-            }
-            
-        }
-        
-    }
 }

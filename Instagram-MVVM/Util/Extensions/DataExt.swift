@@ -13,6 +13,10 @@ extension Data {
     }
     func toJSON() -> /*[String:Any]?*/ NSDictionary? {
         return try? JSONSerialization.jsonObject(with: self, options: .mutableContainers) as? NSDictionary
-        //return try? JSONSerialization.jsonObject(with: self, options: .allowFragments) as? [String:Any]
+        //
+    }
+    
+    func toDictionary() -> [String:Any]? {
+        return try? JSONSerialization.jsonObject(with: self, options: .allowFragments) as? [String:Any]
     }
 }

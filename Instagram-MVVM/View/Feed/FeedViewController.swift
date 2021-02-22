@@ -11,31 +11,52 @@ class FeedViewController: UICollectionViewController {
 
     // MARK: - Properties
     
-    let reusableCellId = "resuseableCellId"
+    fileprivate let reusableCellId = "resuseableCellId"
     
-    let logoInstagram:UIImageView = {
+    fileprivate var listOfPosts = [Post]()
+    
+    fileprivate let logoInstagram:UIImageView = {
         let logo = UIImageView(image: UIImage(named: "Instagram_logo_white")?.withTintColor(.black))
         return logo
     }()
     
     // MARK: - LifeCycle
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.title = "Feed"
+        setupUI()
         
+        setupCollectionView()
+        
+        fetchPosts()
+    }
+    
+    fileprivate func setupUI() {
+        navigationItem.title = "Feed"
+    }
+    
+    fileprivate func setupCollectionView() {
         collectionView.backgroundColor = .white
         
         collectionView.register(FeedCell.self, forCellWithReuseIdentifier: reusableCellId)
     }
     
+    fileprivate func fetchPosts(){
+        DBService.fetchPosts { [weak self] posts in
+            self?.listOfPosts = posts
+            self?.collectionView.reloadData()
+        }
+    }
+    
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return listOfPosts.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reusableCellId, for: indexPath) as! FeedCell
+        cell.viewModel = PostViewModel(listOfPosts[indexPath.item])
         return cell
     }
 
@@ -45,7 +66,7 @@ class FeedViewController: UICollectionViewController {
 extension FeedViewController:UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return .init(width: view.frame.width, height: view.frame.height * 0.6)
+        return .init(width: view.frame.width, height: view.frame.height * 0.6 )
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
