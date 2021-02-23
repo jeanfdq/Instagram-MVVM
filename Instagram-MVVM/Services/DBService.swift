@@ -94,47 +94,4 @@ class DBService: NSObject {
         
     }
     
-    static func createPost(_ user:User, _ selectedImage:UIImage, _ caption:String, completion:@escaping completionHandler) {
-        
-        StorageService.shared.addPhotoStorage(selectedImage, POSTS_PHOTO_PATH_STORAGE) { result in
-            
-            switch result {
-            case .failure(_ ): completion(.failure(.insertPostPhotoError))
-            case .success(let url):
-                
-                let uuid = UUID().uuidString
-                
-                let dictionary = ["uuid":uuid, "imageURL":url, "caption":caption, "createdDate": Date().getDateToString("EEEE, MMM d, yyyy"), "like":0, "rating":0, "ownerId":AuthService.shared.getCurrentUserId() ?? "","ownerUserName":user.userName, "ownerProfileUrl":user.profileImage, "timestamp":Timestamp(date: Date())] as [String : Any]
-                
-                COLLECTION_POSTS.document(uuid).setData(dictionary) { error in
-                    
-                    if let _ = error {
-                        completion(.failure(.createPostError))
-                    } else {
-                        completion(.success(()))
-                    }
-                    
-                }
-                
-            }
-            
-        }
-        
-    }
-    
-    static func fetchPosts(completion:@escaping([Post])->Void) {
-        
-        COLLECTION_POSTS.order(by: "timestamp", descending: true).getDocuments { (snapshot, error) in
-            
-            var listOfPosts = [Post]()
-            
-            _ = snapshot?.documents.compactMap{ item in
-                
-                listOfPosts.append(Post(uuid: item.documentID, dictionary: item.data()))
-                
-            }
-            
-            completion(listOfPosts)
-        }
-    }
 }

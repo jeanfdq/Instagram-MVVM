@@ -16,6 +16,8 @@ class FeedCell: UICollectionViewCell {
         }
     }
     
+    var likeUser:Bool = false
+    
     fileprivate let profilePhotoPost:UIImageView = {
         let photo = UIImageView(image: UIImage(named: "venom-7"))
         photo.backgroundColor = .gray
@@ -57,10 +59,14 @@ class FeedCell: UICollectionViewCell {
         return photo
     }()
     
-    fileprivate let sizeIconsPost:CGFloat = 22
+    fileprivate let sizeIconsPost:CGFloat = 24
     
     fileprivate lazy var likePost:UIImageView = {
-        let like = UIImageView(image: UIImage(systemName: "heart", withConfiguration: UIImage.SymbolConfiguration(weight: .thin))?.withTintColor(.black, renderingMode: .alwaysOriginal))
+        let like = UIImageView()
+        like.isUserInteractionEnabled = true
+        like.addTapGesture { [weak self] in
+            self?.actionPostLike?(self?.viewModel?.getPost)
+        }
         return like
     }()
     
@@ -88,19 +94,32 @@ class FeedCell: UICollectionViewCell {
         return qtdLike
     }()
     
+    fileprivate let commentPostLabel:UILabel = {
+        let comment = UILabel()
+        comment.textColor = .darkGray
+        comment.textAlignment = .left
+        comment.font = .systemFont(ofSize: 13, weight: .semibold)
+        comment.numberOfLines = 1
+        comment.text = "teste de comentario longo para ver se a linha vai qubrar ou se vai ficar com tres pontinhos."
+        return comment
+    }()
+    
     fileprivate lazy var postBottom:UIView = {
        let container = UIView()
         
-        container.addSubViews(likePost, commentPost, sendPost, savePost, quantityLike)
+        container.addSubViews(likePost, commentPost, sendPost, savePost, quantityLike, commentPostLabel)
         
-        likePost.applyViewConstraints(leading: container.leadingAnchor, centerY: container.centerYAnchor, size: .init(width: sizeIconsPost, height: sizeIconsPost), value: .init(top: 0, left: 8, bottom: 0, right: 0))
-        commentPost.applyViewConstraints(leading: likePost.trailingAnchor, centerY: container.centerYAnchor, size: .init(width: sizeIconsPost, height: sizeIconsPost), value: .init(top: 0, left: 8, bottom: 0, right: 0))
-        sendPost.applyViewConstraints(leading: commentPost.trailingAnchor, centerY: container.centerYAnchor, size: .init(width: sizeIconsPost, height: sizeIconsPost), value: .init(top: 0, left: 8, bottom: 0, right: 0))
-        savePost.applyViewConstraints(trailing: container.trailingAnchor, centerY: container.centerYAnchor, size: .init(width: sizeIconsPost, height: sizeIconsPost), value: .init(top: 0, left: 0, bottom: 0, right: 8))
+        likePost.applyViewConstraints(leading: container.leadingAnchor, top: container.topAnchor, size: .init(width: sizeIconsPost+4, height: sizeIconsPost), value: .init(top: 8, left: 8, bottom: 0, right: 0))
+        commentPost.applyViewConstraints(leading: likePost.trailingAnchor, centerY: likePost.centerYAnchor, size: .init(width: sizeIconsPost, height: sizeIconsPost), value: .init(top: 0, left: 8, bottom: 0, right: 0))
+        sendPost.applyViewConstraints(leading: commentPost.trailingAnchor, centerY: commentPost.centerYAnchor, size: .init(width: sizeIconsPost, height: sizeIconsPost), value: .init(top: 0, left: 8, bottom: 0, right: 0))
+        savePost.applyViewConstraints(trailing: container.trailingAnchor, centerY: sendPost.centerYAnchor, size: .init(width: sizeIconsPost, height: sizeIconsPost), value: .init(top: 0, left: 0, bottom: 0, right: 8))
         quantityLike.applyViewConstraints(leading: likePost.leadingAnchor, top: likePost.bottomAnchor, trailing: container.trailingAnchor, value: .init(top: 4, left: 0, bottom: 0, right: 0))
+        commentPostLabel.applyViewConstraints(leading: quantityLike.leadingAnchor, top: quantityLike.bottomAnchor, trailing: savePost.trailingAnchor, value: .init(top: 5, left: 0, bottom: 0, right: 0))
         
         return container
     }()
+    
+    var actionPostLike:((Post?)->Void)?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -109,7 +128,7 @@ class FeedCell: UICollectionViewCell {
         addSubViews(postHeader, photoPost, postBottom)
         postHeader.applyViewConstraints(leading: leadingAnchor, top: topAnchor, trailing: trailingAnchor, size: .zero, value: .init(top: 5, left: 10, bottom: 0, right: 10))
         photoPost.applyViewConstraints(leading: leadingAnchor, top: postHeader.bottomAnchor, trailing: trailingAnchor, bottom: postBottom.topAnchor, value: .init(top: 5, left: 0, bottom: 0, right: 0))
-        postBottom.applyViewConstraints(leading: leadingAnchor, trailing: trailingAnchor, bottom: bottomAnchor, size: .init(width: 0, height: 50), value: .zero)
+        postBottom.applyViewConstraints(leading: leadingAnchor, trailing: trailingAnchor, bottom: bottomAnchor, size: .init(width: 0, height: 70), value: .zero)
     }
     
     required init?(coder: NSCoder) {
@@ -122,7 +141,18 @@ class FeedCell: UICollectionViewCell {
         profilePhotoPost.sd_setImage(with: viewModel.userImageUrl)
         photoPost.sd_setImage(with: viewModel.imageUrl)
         
-        quantityLike.text =  "\(viewModel.likes) like\(viewModel.likes <= 1 ? "" : "s")"
+        
+        commentPostLabel.text = viewModel.caption.trim()
+        
+        viewModel.fetchQuantityPostLikes { quantities in
+            self.quantityLike.text =  "\(quantities) like\(quantities <= 1 ? "" : "s")"
+        }
+        
+        viewModel.fetchIfLikedUser { isLiked in
+            
+            self.likePost.image = isLiked ? UIImage(systemName: "heart.fill", withConfiguration: UIImage.SymbolConfiguration(weight: .thin))?.withTintColor(.red, renderingMode: .alwaysOriginal) : UIImage(systemName: "heart", withConfiguration: UIImage.SymbolConfiguration(weight: .thin))?.withTintColor(.black, renderingMode: .alwaysOriginal)
+            
+        }
         
     }
     

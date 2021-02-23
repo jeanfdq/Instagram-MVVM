@@ -58,6 +58,7 @@
 		A963256025D8A6CF006C4477 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A963255F25D8A6CF006C4477 /* GoogleService-Info.plist */; };
 		A963256425D8C7CA006C4477 /* SearchUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A963256325D8C7CA006C4477 /* SearchUserCell.swift */; };
 		A963256725D8C93A006C4477 /* SearchUserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A963256625D8C93A006C4477 /* SearchUserViewModel.swift */; };
+		A9905BFC25E484780052A0D9 /* PostService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9905BFB25E484780052A0D9 /* PostService.swift */; };
 		D32925D66BFBB59B821DC37E /* Pods_Instagram_MVVM.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98E80329E600E182120ED09E /* Pods_Instagram_MVVM.framework */; };
 /* End PBXBuildFile section */
 
@@ -118,6 +119,7 @@
 		A963255F25D8A6CF006C4477 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A963256325D8C7CA006C4477 /* SearchUserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUserCell.swift; sourceTree = "<group>"; };
 		A963256625D8C93A006C4477 /* SearchUserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUserViewModel.swift; sourceTree = "<group>"; };
+		A9905BFB25E484780052A0D9 /* PostService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -226,6 +228,7 @@
 				8C4AF45625D0781200FF4C99 /* DBService.swift */,
 				8C4AF45C25D07A1200FF4C99 /* StorageService.swift */,
 				8C3C12D925D226D000881764 /* UserService.swift */,
+				A9905BFB25E484780052A0D9 /* PostService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -492,6 +495,7 @@
 				8C9DAD6725CFA92600CE1847 /* MainViewController.swift in Sources */,
 				8C9DAD4425CFA50A00CE1847 /* AppDelegate.swift in Sources */,
 				8C3C12E225D22E5E00881764 /* EncodableExt.swift in Sources */,
+				A9905BFC25E484780052A0D9 /* PostService.swift in Sources */,
 				8C9DADC125CFCB1A00CE1847 /* UIImageExt.swift in Sources */,
 				8C9DAD9A25CFBCCD00CE1847 /* UIViewContronllerExt.swift in Sources */,
 				A963256425D8C7CA006C4477 /* SearchUserCell.swift in Sources */,

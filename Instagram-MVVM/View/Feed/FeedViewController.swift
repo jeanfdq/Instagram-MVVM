@@ -43,13 +43,12 @@ class FeedViewController: UICollectionViewController {
     
     fileprivate func setupCollectionView() {
         collectionView.backgroundColor = .white
-        
         collectionView.register(FeedCell.self, forCellWithReuseIdentifier: reusableCellId)
     }
     
     @objc fileprivate func fetchPosts(){
         listOfPosts.removeAll()
-        DBService.fetchPosts { [weak self] posts in
+        PostService.fetchPosts { [weak self] posts in
             self?.listOfPosts = posts
             self?.collectionView.refreshControl?.endRefreshing()
             self?.collectionView.reloadData()
@@ -63,6 +62,8 @@ class FeedViewController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reusableCellId, for: indexPath) as! FeedCell
         cell.viewModel = PostViewModel(listOfPosts[indexPath.item])
+        cell.actionPostLike = self.actionPostLike
+        
         return cell
     }
 
@@ -76,7 +77,21 @@ extension FeedViewController:UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 40
+        return 20
+    }
+    
+}
+
+// MARK: - ActionPost
+extension FeedViewController {
+     
+    fileprivate func actionPostLike(_ post:Post?) {
+        guard let post = post else {return}
+        PostService.createPostLike(PostViewModel(post)) { isSucess in
+            if isSucess {
+                self.collectionView.reloadData()
+            }
+        }
     }
     
 }

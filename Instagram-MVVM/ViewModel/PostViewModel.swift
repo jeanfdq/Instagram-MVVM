@@ -15,6 +15,14 @@ struct PostViewModel {
         self.post = post
     }
     
+    var getPost:Post{
+        return post
+    }
+    
+    var postId:String {
+        return post.uuid
+    }
+    
     var userImageUrl:URL? {
         return URL(string: post.ownerProfileUrl)
     }
@@ -33,6 +41,19 @@ struct PostViewModel {
     
     var likes:Int {
         return post.likes
+    }
+    
+    
+    func fetchIfLikedUser(completion:@escaping(Bool)->Void){
+        PostService.fetchIfLikedUser(postId: post.uuid) { result in
+            completion(result)
+        }
+    }
+    
+    func fetchQuantityPostLikes(completion:@escaping(Int)->Void) {
+        PostService.fetchQuantityPostLike(postId: post.uuid) { quantities in
+            completion(quantities)
+        }
     }
     
 }

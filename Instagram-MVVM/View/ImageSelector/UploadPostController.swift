@@ -78,7 +78,7 @@ class UploadPostController: UIViewController {
                 
                 let progress = showLoading()
                 
-                DBService.createPost(user, selectedImage, captionImage.text) { [unowned self] result in
+                PostService.createPost(user, selectedImage, captionImage.text) { [unowned self] result in
                     
                     switch result {
                     case .failure(let error): self.showLoafError(message: error.rawValue)
