@@ -72,6 +72,10 @@ class FeedCell: UICollectionViewCell {
     
     fileprivate lazy var commentPost:UIImageView = {
         let comment = UIImageView(image: UIImage(systemName: "bubble.left", withConfiguration: UIImage.SymbolConfiguration(weight: .thin))?.withTintColor(.black, renderingMode: .alwaysOriginal))
+        comment.isUserInteractionEnabled = true
+        comment.addTapGesture { [weak self] in
+            self?.actionPostComment?(self?.viewModel?.getPost)
+        }
         return comment
     }()
     
@@ -100,7 +104,6 @@ class FeedCell: UICollectionViewCell {
         comment.textAlignment = .left
         comment.font = .systemFont(ofSize: 13, weight: .semibold)
         comment.numberOfLines = 1
-        comment.text = "teste de comentario longo para ver se a linha vai qubrar ou se vai ficar com tres pontinhos."
         return comment
     }()
     
@@ -120,6 +123,7 @@ class FeedCell: UICollectionViewCell {
     }()
     
     var actionPostLike:((Post?)->Void)?
+    var actionPostComment:((Post?)->Void)?
     
     override init(frame: CGRect) {
         super.init(frame: frame)

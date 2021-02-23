@@ -55,6 +55,7 @@
 		A914693525E2D9650021CBA9 /* PostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A914693425E2D9650021CBA9 /* PostViewModel.swift */; };
 		A914693825E309E10021CBA9 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = A914693725E309E10021CBA9 /* Post.swift */; };
 		A914693B25E310400021CBA9 /* DateExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = A914693A25E310400021CBA9 /* DateExt.swift */; };
+		A922CF3D25E4A88A0013AC7E /* CommentPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A922CF3C25E4A88A0013AC7E /* CommentPostViewController.swift */; };
 		A963256025D8A6CF006C4477 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A963255F25D8A6CF006C4477 /* GoogleService-Info.plist */; };
 		A963256425D8C7CA006C4477 /* SearchUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A963256325D8C7CA006C4477 /* SearchUserCell.swift */; };
 		A963256725D8C93A006C4477 /* SearchUserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A963256625D8C93A006C4477 /* SearchUserViewModel.swift */; };
@@ -116,6 +117,7 @@
 		A914693425E2D9650021CBA9 /* PostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewModel.swift; sourceTree = "<group>"; };
 		A914693725E309E10021CBA9 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		A914693A25E310400021CBA9 /* DateExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExt.swift; sourceTree = "<group>"; };
+		A922CF3C25E4A88A0013AC7E /* CommentPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentPostViewController.swift; sourceTree = "<group>"; };
 		A963255F25D8A6CF006C4477 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A963256325D8C7CA006C4477 /* SearchUserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUserCell.swift; sourceTree = "<group>"; };
 		A963256625D8C93A006C4477 /* SearchUserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUserViewModel.swift; sourceTree = "<group>"; };
@@ -312,6 +314,7 @@
 		8C9DAD6E25CFAC4700CE1847 /* Feed */ = {
 			isa = PBXGroup;
 			children = (
+				A922CF3B25E4A8670013AC7E /* Comment */,
 				8C9DAD8425CFB82100CE1847 /* FeedViewController.swift */,
 				8CA4D6CE25D0CBD900208F91 /* FeedCell.swift */,
 			);
@@ -363,6 +366,14 @@
 				A914693125E2C8E00021CBA9 /* ImputTextView.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		A922CF3B25E4A8670013AC7E /* Comment */ = {
+			isa = PBXGroup;
+			children = (
+				A922CF3C25E4A88A0013AC7E /* CommentPostViewController.swift */,
+			);
+			path = Comment;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -505,6 +516,7 @@
 				8C4AF44A25D06F5A00FF4C99 /* SignUpViewModel.swift in Sources */,
 				A914693B25E310400021CBA9 /* DateExt.swift in Sources */,
 				8C9DADB525CFC95300CE1847 /* UIButtonExt.swift in Sources */,
+				A922CF3D25E4A88A0013AC7E /* CommentPostViewController.swift in Sources */,
 				8C9DAD8525CFB82100CE1847 /* FeedViewController.swift in Sources */,
 				8C4AF44D25D070EE00FF4C99 /* LoginViewModel.swift in Sources */,
 				8C9DADBB25CFC9F200CE1847 /* UITextFieldExt.swift in Sources */,

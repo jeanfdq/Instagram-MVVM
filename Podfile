@@ -10,6 +10,7 @@ target 'Instagram-MVVM' do
   pod 'YPImagePicker'
   pod 'JGProgressHUD'
   pod 'Loaf'
+  #pod 'IQKeyboardManager'
   
   # Pods Firebase
   #pod 'Firebase/Analytics'

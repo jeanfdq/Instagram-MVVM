@@ -62,8 +62,9 @@ class FeedViewController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reusableCellId, for: indexPath) as! FeedCell
         cell.viewModel = PostViewModel(listOfPosts[indexPath.item])
-        cell.actionPostLike = self.actionPostLike
         
+        cell.actionPostLike     = self.actionPostLike
+        cell.actionPostComment  = self.actionPostComment
         return cell
     }
 
@@ -84,7 +85,6 @@ extension FeedViewController:UICollectionViewDelegateFlowLayout {
 
 // MARK: - ActionPost
 extension FeedViewController {
-     
     fileprivate func actionPostLike(_ post:Post?) {
         guard let post = post else {return}
         PostService.createPostLike(PostViewModel(post)) { isSucess in
@@ -92,6 +92,12 @@ extension FeedViewController {
                 self.collectionView.reloadData()
             }
         }
+    }
+    
+    fileprivate func actionPostComment(_ post:Post?) {
+        guard let post = post else {return}
+        let commentVC = CommentPostViewController(collectionViewLayout: UICollectionViewFlowLayout(), post)
+        navigationController?.pushViewController(commentVC, animated: true)
     }
     
 }
