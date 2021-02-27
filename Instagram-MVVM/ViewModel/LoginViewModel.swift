@@ -18,15 +18,8 @@ struct LoginViewModel {
         return true
     }
     
-    func doLogin(competion:@escaping(Bool)->Void){
-        
-        AuthService.shared.userLogin(self) { result in
-            switch result {
-            case .failure(_ ): competion(false)
-            case .success(()): competion(true)
-            }
-        }
-        
+    func doLogin(completion:@escaping CompletionHandler<Result<Void, Error>>) {
+        AuthService.shared.userLogin(self, completion: completion)
     }
     
     func doLogout() {

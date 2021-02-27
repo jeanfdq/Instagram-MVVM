@@ -88,6 +88,8 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        emailField.delegate = self
+        
         setupView()
         setupConstraintsSubViews()
     }
@@ -101,6 +103,10 @@ class LoginViewController: UIViewController {
     
     fileprivate func setupView() {
         view.setBackgroundGradientLogin()
+        dismissKeyboard()
+    }
+    
+    fileprivate func dismissKeyboard(){
         view.addTapGesture { [weak self] in
             self?.view.dismissKeyboard()
         }
@@ -119,12 +125,11 @@ class LoginViewController: UIViewController {
             
             let progress = self.showLoading()
             
-            viewModel.doLogin { [weak self] isLogged in
+            viewModel.doLogin { [weak self] result in
                 
-                if isLogged {
-                    self?.dismissToRoot()
-                } else {
-                    self?.showLoafError(message: "Usuário/Senha inválido.")
+                switch result {
+                    case .success(): self?.dismissToRoot()
+                    case .failure(_ ): self?.showLoafError(message: "Usuário/Senha inválido.")
                 }
                 
                 progress.dismiss()
@@ -135,4 +140,21 @@ class LoginViewController: UIViewController {
         
     }
 
+}
+
+// MARK: - TextField Delegate
+extension LoginViewController : UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        if textField == emailField {
+            passwordField.becomeFirstResponder()
+        }
+        
+        if textField == passwordField {
+            dismissKeyboard()
+            login()
+        }
+        
+        return true
+    }
 }

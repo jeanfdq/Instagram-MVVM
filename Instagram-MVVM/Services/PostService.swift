@@ -9,7 +9,7 @@ import Firebase
 
 class PostService: NSObject {
     
-    class func createPost(_ user:User, _ selectedImage:UIImage, _ caption:String, completion:@escaping (Result<Void,dbError>)->Void) {
+    class func createPost(_ user:User, _ selectedImage:UIImage, _ caption:String, _ completion:@escaping CompletionHandler<Result<Void,dbError>>) {
         
         StorageService.shared.addPhotoStorage(selectedImage, POSTS_PHOTO_PATH_STORAGE) { result in
             
@@ -26,7 +26,14 @@ class PostService: NSObject {
                     if let _ = error {
                         completion(.failure(.createPostError))
                     } else {
-                        completion(.success(()))
+                        addComment(uuid, caption) { isSuccess in
+                            if isSuccess {
+                                completion(.success(()))
+                            } else {
+                                completion(.failure(.createPostError))
+                            }
+                        }
+                        
                     }
                     
                 }
@@ -37,7 +44,7 @@ class PostService: NSObject {
         
     }
     
-    class func fetchPosts(completion:@escaping([Post])->Void) {
+    class func fetchPosts(_ completion:@escaping CompletionHandler<[Post]>) {
         
         COLLECTION_POSTS.order(by: "timestamp", descending: true).getDocuments { (snapshot, error) in
             
@@ -56,23 +63,46 @@ class PostService: NSObject {
         }
     }
     
-    class func createPostLike(_ viewModel:PostViewModel, completion:@escaping(Bool)->Void) {
+    class func fetchPosts(withUser userId:String, completion:@escaping([Post])->Void){
+        
+        var listOfPosts = [Post]()
+        
+        let query = COLLECTION_POSTS.whereField("ownerId", isEqualTo: userId)
+        query.getDocuments { (snapshots, error) in
+            
+            _ = snapshots?.documents.compactMap{ item in
+                listOfPosts.append(Post(uuid: item.documentID, dictionary: item.data()))
+            }
+            
+            completion(listOfPosts)
+            
+        }
+        
+    }
+    
+}
+
+// MARK: - LIKES
+
+extension PostService {
+    
+    class func createPostLike(_ viewModel:PostViewModel, _ completion:@escaping CompletionHandler<Bool>) {
         
         guard let userId = AuthService.shared.getCurrentUserId() else {return}
         
-        COLLECTION_LIKES.document(viewModel.postId).collection(POSTS_LIKED_USERS).document(userId).setData([:]) { error in
+        COLLECTION_LIKES.document(viewModel.postId).collection(POSTS_LIKED_USERS).document(userId).setData([:] ) { error in
             completion(error == nil)
         }
         
     }
     
-    class func fetchQuantityPostLike(postId:String, completion:@escaping(Int)->Void) {
+    class func fetchQuantityPostLike(postId:String, _ completion:@escaping CompletionHandler<Int>) {
         COLLECTION_LIKES.document(postId).collection(POSTS_LIKED_USERS).getDocuments { (snapshots, error) in
             completion(snapshots?.count ?? 0)
         }
     }
     
-    class func fetchIfLikedUser( postId:String, completion:@escaping(Bool)->Void){
+    class func fetchIfLikedUser( postId:String, _ completion:@escaping CompletionHandler<Bool>){
         
         guard let userId = AuthService.shared.getCurrentUserId() else {return}
         
@@ -81,6 +111,55 @@ class PostService: NSObject {
             completion(item?.exists ?? false)
         }
         
+    }
+}
+
+//MARK: - Comments
+
+extension PostService {
+    
+    class func addComment(_ postId:String, _ comment:String, _ completion:@escaping CompletionHandler<Bool>){
+        
+        guard let userId = AuthService.shared.getCurrentUserId() else {
+            completion(false)
+            return
+        }
+        
+        guard let userData:Data? = DefaultsManager.shared().get(key: .userLoggedData), let user:User = userData?.toModel() else {
+            completion(false)
+            return
+        }
+        
+        let postComment = PostComment(postId: postId, userId: userId, userProfileUrl: user.profileImage, userName: user.userName, userComment: comment)
+        
+        guard let dictionary = postComment.toData()?.toDictionary() else {
+            completion(false)
+            return
+        }
+        
+        COLLECTION_POSTS.document(postId).collection(POSTS_COMMENTED_USERS).document(userId).setData(dictionary) { error in
+            completion(error == nil)
+        }
+        
+    }
+    
+    class func fetchComments(_ postId:String, _ completion:@escaping CompletionHandler<[PostComment]>){
+        
+        COLLECTION_POSTS.document(postId).collection(POSTS_COMMENTED_USERS).getDocuments { (snapshot, error) in
+            
+            guard let snapshot = snapshot else {return}
+            
+            var listComments = [PostComment]()
+            
+            _  = snapshot.documents.map { item in
+                if let commentData = item.data().toData() {
+                    if let postComment:PostComment = commentData.toModel() {
+                        listComments.append(postComment)
+                    }
+                }
+            }
+            completion(listComments)
+        }
     }
     
 }

@@ -24,8 +24,8 @@ class UploadPostController: UIViewController {
         return piv
     }()
     
-    private lazy var captionImage:ImputTextView = {
-        let caption = ImputTextView()
+    private lazy var captionImage:InputTextView = {
+        let caption = InputTextView()
         caption.placeHolderText = "Enter caption..."
         caption.font = .systemFont(ofSize: 16, weight: .medium)
         caption.delegate = self

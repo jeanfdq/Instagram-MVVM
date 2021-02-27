@@ -82,7 +82,7 @@ class ProfileViewController: UICollectionViewController, UICollectionViewDelegat
     }
     
     fileprivate func fetchMyPosts() {
-        UserService.fetchPosts(withUser: user.id) { [weak self] posts in
+        PostService.fetchPosts(withUser: user.id) { [weak self] posts in
             self?.myPosts = posts
             self?.collectionView.reloadData()
         }

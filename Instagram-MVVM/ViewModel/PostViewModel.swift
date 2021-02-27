@@ -44,16 +44,12 @@ struct PostViewModel {
     }
     
     
-    func fetchIfLikedUser(completion:@escaping(Bool)->Void){
-        PostService.fetchIfLikedUser(postId: post.uuid) { result in
-            completion(result)
-        }
+    func fetchIfLikedUser(completion:@escaping CompletionHandler<Bool>){
+        PostService.fetchIfLikedUser(postId: post.uuid, completion)
     }
     
-    func fetchQuantityPostLikes(completion:@escaping(Int)->Void) {
-        PostService.fetchQuantityPostLike(postId: post.uuid) { quantities in
-            completion(quantities)
-        }
+    func fetchQuantityPostLikes(completion:@escaping CompletionHandler<Int>) {
+        PostService.fetchQuantityPostLike(postId: post.uuid, completion)
     }
     
 }

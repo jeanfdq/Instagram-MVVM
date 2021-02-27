@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ImputTextView: UITextView {
+class InputTextView: UITextView {
     
     // MARK: - Properties
     

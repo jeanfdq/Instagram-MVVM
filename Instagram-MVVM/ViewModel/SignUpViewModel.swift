@@ -44,17 +44,8 @@ struct SignUpViewModel {
         
     }
     
-    func createUser( completion:@escaping(Result<Void,dbError>)->Void){
-        
-        DBService.createUser(self) { result in
-            
-            switch result {
-            case .failure(let error): completion(.failure(error))
-            case .success(): completion(.success(()))
-            }
-            
-        }
-        
+    func createUser( completion:@escaping CompletionHandler<Result<Void,dbError>>){
+        UserService.createUser(self, completion: completion)
     }
     
 }
