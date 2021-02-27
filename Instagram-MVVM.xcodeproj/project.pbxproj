@@ -28,6 +28,8 @@
 		8C790A5125EACB7000CC9B50 /* NotificationsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C790A5025EACB7000CC9B50 /* NotificationsService.swift */; };
 		8C790A5425EADB1C00CC9B50 /* CurrentUserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C790A5325EADB1C00CC9B50 /* CurrentUserData.swift */; };
 		8C790A5725EAE11400CC9B50 /* PostNotificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C790A5625EAE11400CC9B50 /* PostNotificationViewModel.swift */; };
+		8C790A7625EB05C900CC9B50 /* JailbreakDetection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C790A7525EB05C900CC9B50 /* JailbreakDetection.swift */; };
+		8C790A7A25EB0A2500CC9B50 /* JailbreakViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C790A7925EB0A2500CC9B50 /* JailbreakViewController.swift */; };
 		8C7B899825E990AA00A6C144 /* CommentInputAcessoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7B899725E990AA00A6C144 /* CommentInputAcessoryView.swift */; };
 		8C7B899C25E99F2B00A6C144 /* CommentPostViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7B899B25E99F2B00A6C144 /* CommentPostViewCell.swift */; };
 		8C7B899F25E9B7AE00A6C144 /* PostComment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7B899E25E9B7AE00A6C144 /* PostComment.swift */; };
@@ -96,6 +98,8 @@
 		8C790A5025EACB7000CC9B50 /* NotificationsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsService.swift; sourceTree = "<group>"; };
 		8C790A5325EADB1C00CC9B50 /* CurrentUserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUserData.swift; sourceTree = "<group>"; };
 		8C790A5625EAE11400CC9B50 /* PostNotificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostNotificationViewModel.swift; sourceTree = "<group>"; };
+		8C790A7525EB05C900CC9B50 /* JailbreakDetection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JailbreakDetection.swift; sourceTree = "<group>"; };
+		8C790A7925EB0A2500CC9B50 /* JailbreakViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JailbreakViewController.swift; sourceTree = "<group>"; };
 		8C7B899725E990AA00A6C144 /* CommentInputAcessoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentInputAcessoryView.swift; sourceTree = "<group>"; };
 		8C7B899B25E99F2B00A6C144 /* CommentPostViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentPostViewCell.swift; sourceTree = "<group>"; };
 		8C7B899E25E9B7AE00A6C144 /* PostComment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostComment.swift; sourceTree = "<group>"; };
@@ -187,6 +191,14 @@
 			path = SignUp;
 			sourceTree = "<group>";
 		};
+		8C790A7825EB0A0400CC9B50 /* Jailbreak */ = {
+			isa = PBXGroup;
+			children = (
+				8C790A7925EB0A2500CC9B50 /* JailbreakViewController.swift */,
+			);
+			path = Jailbreak;
+			sourceTree = "<group>";
+		};
 		8C9DAD3725CFA50A00CE1847 = {
 			isa = PBXGroup;
 			children = (
@@ -258,6 +270,7 @@
 		8C9DAD6325CFA8E200CE1847 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				8C790A7825EB0A0400CC9B50 /* Jailbreak */,
 				8C4AF44125D059D700FF4C99 /* SignUp */,
 				8C4AF43B25D0438200FF4C99 /* Login */,
 				8C9DAD6C25CFAC0E00CE1847 /* LauchScreen */,
@@ -389,6 +402,7 @@
 				8C4AF44625D067B000FF4C99 /* PickerView.swift */,
 				8C4AF46325D099AF00FF4C99 /* Progress.swift */,
 				A914693125E2C8E00021CBA9 /* InputTextView.swift */,
+				8C790A7525EB05C900CC9B50 /* JailbreakDetection.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -542,6 +556,7 @@
 				8C4AF45025D0724E00FF4C99 /* FirebaseInstances.swift in Sources */,
 				8C9DAD8E25CFB84300CE1847 /* NotificationsViewController.swift in Sources */,
 				8CA4D6CC25D0BC1800208F91 /* NotificationNameExt.swift in Sources */,
+				8C790A7A25EB0A2500CC9B50 /* JailbreakViewController.swift in Sources */,
 				8C4AF44A25D06F5A00FF4C99 /* SignUpViewModel.swift in Sources */,
 				A914693B25E310400021CBA9 /* DateExt.swift in Sources */,
 				8C9DADB525CFC95300CE1847 /* UIButtonExt.swift in Sources */,
@@ -556,6 +571,7 @@
 				8C7B89A225E9BAA900A6C144 /* PostCommentViewModel.swift in Sources */,
 				8C7B899825E990AA00A6C144 /* CommentInputAcessoryView.swift in Sources */,
 				8C3C12DE25D2288500881764 /* User.swift in Sources */,
+				8C790A7625EB05C900CC9B50 /* JailbreakDetection.swift in Sources */,
 				8C7B899C25E99F2B00A6C144 /* CommentPostViewCell.swift in Sources */,
 				8C4AF45325D074C500FF4C99 /* AuthService.swift in Sources */,
 				8C9DADB825CFC99B00CE1847 /* UILabelExt.swift in Sources */,
