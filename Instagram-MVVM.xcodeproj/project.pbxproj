@@ -51,6 +51,7 @@
 		8C9DADBB25CFC9F200CE1847 /* UITextFieldExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9DADBA25CFC9F200CE1847 /* UITextFieldExt.swift */; };
 		8C9DADBE25CFCA3500CE1847 /* UIViewExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9DADBD25CFCA3500CE1847 /* UIViewExt.swift */; };
 		8C9DADC125CFCB1A00CE1847 /* UIImageExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9DADC025CFCB1A00CE1847 /* UIImageExt.swift */; };
+		8CA4589F25EAC21200D6C347 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA4589E25EAC21200D6C347 /* Notification.swift */; };
 		8CA4D6CC25D0BC1800208F91 /* NotificationNameExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA4D6CB25D0BC1800208F91 /* NotificationNameExt.swift */; };
 		8CA4D6CF25D0CBD900208F91 /* FeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA4D6CE25D0CBD900208F91 /* FeedCell.swift */; };
 		8CB38FC525D35BCC00262FF1 /* ProfileHeaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB38FC425D35BCC00262FF1 /* ProfileHeaderViewModel.swift */; };
@@ -116,6 +117,7 @@
 		8C9DADBA25CFC9F200CE1847 /* UITextFieldExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextFieldExt.swift; sourceTree = "<group>"; };
 		8C9DADBD25CFCA3500CE1847 /* UIViewExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExt.swift; sourceTree = "<group>"; };
 		8C9DADC025CFCB1A00CE1847 /* UIImageExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExt.swift; sourceTree = "<group>"; };
+		8CA4589E25EAC21200D6C347 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		8CA4D6CB25D0BC1800208F91 /* NotificationNameExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationNameExt.swift; sourceTree = "<group>"; };
 		8CA4D6CE25D0CBD900208F91 /* FeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCell.swift; sourceTree = "<group>"; };
 		8CB38FC425D35BCC00262FF1 /* ProfileHeaderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderViewModel.swift; sourceTree = "<group>"; };
@@ -278,6 +280,7 @@
 				8C3C12DD25D2288500881764 /* User.swift */,
 				A914693725E309E10021CBA9 /* Post.swift */,
 				8C7B899E25E9B7AE00A6C144 /* PostComment.swift */,
+				8CA4589E25EAC21200D6C347 /* Notification.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -543,6 +546,7 @@
 				8C9DADB825CFC99B00CE1847 /* UILabelExt.swift in Sources */,
 				8C9DADA925CFC78000CE1847 /* UIAlertActionExt.swift in Sources */,
 				8C9DADBE25CFCA3500CE1847 /* UIViewExt.swift in Sources */,
+				8CA4589F25EAC21200D6C347 /* Notification.swift in Sources */,
 				8C9DAD4625CFA50A00CE1847 /* SceneDelegate.swift in Sources */,
 				8CA4D6CF25D0CBD900208F91 /* FeedCell.swift in Sources */,
 				8C9DAD9D25CFBE6C00CE1847 /* FactoryTabBarIcons.swift in Sources */,
