@@ -13,7 +13,10 @@ class NotificationsViewController: UICollectionViewController, UICollectionViewD
     let reuseIdentifierCell = "ReuseIdentifier"
     
     private var listOfNotifications = [PostNotification]() {
-        didSet { self.collectionView.reloadData() }
+        didSet {
+            self.collectionView.refreshControl?.endRefreshing()
+            self.collectionView.reloadData()
+        }
     }
     
     // MARK: - Lifecycle
@@ -22,6 +25,7 @@ class NotificationsViewController: UICollectionViewController, UICollectionViewD
         super.viewDidLoad()
         
         setupUI()
+        setupRefreshControl()
         fetchNotifications()
         
     }
@@ -34,7 +38,13 @@ class NotificationsViewController: UICollectionViewController, UICollectionViewD
         collectionView.register(NotificationsCell.self, forCellWithReuseIdentifier: reuseIdentifierCell)
     }
     
-    fileprivate func fetchNotifications() {
+    fileprivate func setupRefreshControl() {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(self.fetchNotifications), for: .valueChanged)
+        collectionView.refreshControl = refreshControl
+    }
+    
+    @objc fileprivate func fetchNotifications() {
         let progress = self.showLoading()
         NotificationsService.fetchNotifications { list in
             self.listOfNotifications = list

@@ -68,7 +68,7 @@ class NotificationsCell: UICollectionViewCell {
     fileprivate func configure(){
         guard let viewModel = viewModel else {return}
         userProfileImage.sd_setImage(with: viewModel.userProfileUrl)
-        typeLabel.setTitleAttributeswith(firstTitle: viewModel.userName, firstColor: .black, sizeFirstFont: 13, isfirsBold: true, secondTitle: viewModel.typeNotification, secondColor: .gray, sizeSecondFont: 13, isSecondBold: false)
+        typeLabel.setTitleAttributeswith(firstTitle: viewModel.userName, firstColor: .black, sizeFirstFont: 12, isfirsBold: true, secondTitle: viewModel.typeNotification, secondColor: .darkGray, sizeSecondFont: 12, isSecondBold: false)
         notificationTime.text = viewModel.notificationDateDescription.trim()
         postImage.sd_setImage(with: viewModel.postImageUrl)
     }
