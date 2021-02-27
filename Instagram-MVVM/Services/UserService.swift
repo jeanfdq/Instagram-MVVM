@@ -136,18 +136,22 @@ class UserService: NSObject {
     
     class func follow(_ uuid:String, completion:@escaping(Result<Void,Error>)->Void){
         
-        guard let currentUserId = AuthService.shared.getCurrentUserId() else {return}
-        COLLECTION_FOLLOWING.document(currentUserId).collection(COLLECTION_USER_FOLLOWING).document(uuid).setData([:]) { error in
+        let currentUser = CurrentUserData.get()
+        
+        COLLECTION_FOLLOWING.document(currentUser.id).collection(COLLECTION_USER_FOLLOWING).document(uuid).setData([:]) { error in
             
             if let error = error {
                 completion(.failure(error))
             } else {
                 
-                COLLECTION_FOLLOWERS.document(uuid).collection(COLLECTION_USER_FOLLOWERS).document(currentUserId).setData([:]) { error in
+                COLLECTION_FOLLOWERS.document(uuid).collection(COLLECTION_USER_FOLLOWERS).document(currentUser.id).setData([:]) { error in
                     
                     if let error = error {
                         completion(.failure(error))
                     } else {
+                        
+                        NotificationsService.uploadNotification(currentUser, toUserId: uuid, type: .follow)
+                        
                         completion(.success(()))
                     }
                     

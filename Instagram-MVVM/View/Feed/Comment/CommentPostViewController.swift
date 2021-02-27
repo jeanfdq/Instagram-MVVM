@@ -82,7 +82,7 @@ class CommentPostViewController: UICollectionViewController, UICollectionViewDel
         guard let tab = self.tabBarController as? MainViewController else {return}
         guard let user = tab.user else {return}
         
-        PostService.addComment(post.uuid, user, comment) { isSuccess in
+        PostService.addComment(post, user, comment) { isSuccess in
             if isSuccess {
                 self.fetchComments()
             } else {

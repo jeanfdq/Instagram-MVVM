@@ -26,7 +26,7 @@ class PostService: NSObject {
                     if let _ = error {
                         completion(.failure(.createPostError))
                     } else {
-                        addComment(uuid, user, caption) { isSuccess in
+                        addComment(Post(uuid: uuid, dictionary: dictionary), user, caption) { isSuccess in
                             if isSuccess {
                                 completion(.success(()))
                             } else {
@@ -99,11 +99,23 @@ extension PostService {
             if list.contains(userId) {
                 
                 unLikePost(viewModel.postId)
+                
                 completion(error == nil)
                 
             } else {
                 
                 COLLECTION_LIKES.document(viewModel.postId).collection(POSTS_LIKED_USERS).document(userId).setData([:] ) { error in
+                    
+                    if error == nil {
+                        // like notification
+                        if let userData:Data = DefaultsManager.shared().get(key: .userLoggedData) {
+                            if let user:User = userData.toModel() {
+                                NotificationsService.uploadNotification(user, toUserId: viewModel.postOwnerId, type: .like, post: viewModel.getPost)
+                            }
+                            
+                        }
+                    }
+                    
                     completion(error == nil)
                 }
                 
@@ -140,16 +152,23 @@ extension PostService {
 
 extension PostService {
     
-    class func addComment(_ postId:String, _ user:User, _ comment:String, _ completion:@escaping CompletionHandler<Bool>){
+    class func addComment(_ post:Post, _ user:User, _ comment:String, _ completion:@escaping CompletionHandler<Bool>){
         
-        let postComment = PostComment(postId: postId, userId: user.id, userProfileUrl: user.profileImage, userName: user.userName, userComment: comment)
+        let postComment = PostComment(postId: post.uuid, userId: user.id, userProfileUrl: user.profileImage, userName: user.userName, userComment: comment)
         
         guard let dictionary = postComment.toData()?.toDictionary() else {
             completion(false)
             return
         }
         
-        COLLECTION_POSTS.document(postId).collection(POSTS_COMMENTED_USERS).document(user.id).setData(dictionary) { error in
+        COLLECTION_POSTS.document(post.uuid).collection(POSTS_COMMENTED_USERS).document(user.id).setData(dictionary) { error in
+            
+            if error == nil {
+            
+                NotificationsService.uploadNotification(user, toUserId: post.ownerId, type: .comment, post: post)
+                
+            }
+            
             completion(error == nil)
         }
         

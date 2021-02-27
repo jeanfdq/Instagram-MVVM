@@ -43,6 +43,10 @@ struct PostViewModel {
         return post.likes
     }
     
+    var postOwnerId:String {
+        return post.ownerId
+    }
+    
     
     func fetchIfLikedUser(completion:@escaping CompletionHandler<Bool>){
         PostService.fetchIfLikedUser(postId: post.uuid, completion)

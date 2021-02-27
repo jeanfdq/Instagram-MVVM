@@ -21,8 +21,7 @@ class FeedViewController: UICollectionViewController {
     }()
     
     // MARK: - LifeCycle
-    
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -32,6 +31,8 @@ class FeedViewController: UICollectionViewController {
         
         fetchPosts()
     }
+    
+    // MARK: - functions
     
     fileprivate func setupUI() {
         navigationItem.title = "Feed"
@@ -54,6 +55,14 @@ class FeedViewController: UICollectionViewController {
             self?.collectionView.reloadData()
         }
     }
+    
+    fileprivate func getCurrentUser() -> User? {
+        guard let tab = self.tabBarController as? MainViewController else {return nil}
+        guard let user = tab.user else {return nil}
+        return user
+    }
+    
+    // MARK: - CollectionView Events
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return listOfPosts.count
@@ -89,6 +98,7 @@ extension FeedViewController {
         guard let post = post else {return}
         PostService.createPostLike(PostViewModel(post)) { isSucess in
             if isSucess {
+                
                 self.collectionView.reloadData()
             }
         }

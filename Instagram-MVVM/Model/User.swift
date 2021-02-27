@@ -20,6 +20,9 @@ struct User:Codable {
     var followed:Bool?      = false
     var stats:UserStats?    = UserStats(followers: 0, following: 0, posts: 0)
     
+    static func empty () -> Self {
+        return User(id: "", profileImage: "", email: "", fullName: "", userName: "", userSearch: "")
+    }
     static func dictionaryToModel(dictionary:[String:Any]) -> Self{
         let model:User? = dictionary.toData()?.toModel()
         return model ?? User(id: "", profileImage: "", email: "", fullName: "", userName: "", userSearch:"")

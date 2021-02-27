@@ -25,6 +25,7 @@ struct PostNotification {
     //let id:String
     let userId:String
     let userProfileUrl:String
+    let userName:String
     let postImageUrl:String?
     let postId:String?
     let type:NotificationType
@@ -34,6 +35,7 @@ struct PostNotification {
         
         //self.id = dicitionary["id"] as? String ?? ""
         self.userId         = dicitionary["userId"] as? String ?? ""
+        self.userName       = dicitionary["userName"] as? String ?? ""
         self.userProfileUrl = dicitionary["userProfileUrl"] as? String ?? ""
         self.postImageUrl   = dicitionary["postImageUrl"] as? String ?? ""
         self.postId         = dicitionary["postId"] as? String ?? ""
