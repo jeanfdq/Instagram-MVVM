@@ -26,7 +26,7 @@ class PostService: NSObject {
                     if let _ = error {
                         completion(.failure(.createPostError))
                     } else {
-                        addComment(uuid, caption) { isSuccess in
+                        addComment(uuid, user, caption) { isSuccess in
                             if isSuccess {
                                 completion(.success(()))
                             } else {
@@ -118,26 +118,16 @@ extension PostService {
 
 extension PostService {
     
-    class func addComment(_ postId:String, _ comment:String, _ completion:@escaping CompletionHandler<Bool>){
+    class func addComment(_ postId:String, _ user:User, _ comment:String, _ completion:@escaping CompletionHandler<Bool>){
         
-        guard let userId = AuthService.shared.getCurrentUserId() else {
-            completion(false)
-            return
-        }
-        
-        guard let userData:Data? = DefaultsManager.shared().get(key: .userLoggedData), let user:User = userData?.toModel() else {
-            completion(false)
-            return
-        }
-        
-        let postComment = PostComment(postId: postId, userId: userId, userProfileUrl: user.profileImage, userName: user.userName, userComment: comment)
+        let postComment = PostComment(postId: postId, userId: user.id, userProfileUrl: user.profileImage, userName: user.userName, userComment: comment)
         
         guard let dictionary = postComment.toData()?.toDictionary() else {
             completion(false)
             return
         }
         
-        COLLECTION_POSTS.document(postId).collection(POSTS_COMMENTED_USERS).document(userId).setData(dictionary) { error in
+        COLLECTION_POSTS.document(postId).collection(POSTS_COMMENTED_USERS).document(user.id).setData(dictionary) { error in
             completion(error == nil)
         }
         

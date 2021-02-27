@@ -9,6 +9,8 @@ import UIKit
 
 class MainViewController: UITabBarController {
     
+    var user:User?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -23,7 +25,9 @@ class MainViewController: UITabBarController {
     
     deinit { NotificationCenter.default.removeObserver(self) }
     
-    fileprivate func setupViewControllers(with user:User) {
+    fileprivate func setupViewControllers() {
+        
+        guard let user = self.user else {return}
         
         let feed = FeedViewController(collectionViewLayout: UICollectionViewFlowLayout()).setTemplateNavigationController(FactoryTabBarIcons.home())
         
@@ -66,8 +70,8 @@ class MainViewController: UITabBarController {
                     self?.showLoafError(message: err.localizedDescription)
 
                 case .success(let user):
-                    guard let user = user else {return}
-                    self?.setupViewControllers(with: user)
+                    self?.user = user
+                    self?.setupViewControllers()
                 }
                 progress.dismiss()
             }

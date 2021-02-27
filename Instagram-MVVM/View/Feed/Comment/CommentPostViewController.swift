@@ -78,7 +78,11 @@ class CommentPostViewController: UICollectionViewController, UICollectionViewDel
     
     fileprivate func addComment(_ comment:String) {
         let progress = self.showLoading()
-        PostService.addComment(post.uuid, comment) { isSuccess in
+        
+        guard let tab = self.tabBarController as? MainViewController else {return}
+        guard let user = tab.user else {return}
+        
+        PostService.addComment(post.uuid, user, comment) { isSuccess in
             if isSuccess {
                 self.fetchComments()
             } else {
@@ -86,6 +90,7 @@ class CommentPostViewController: UICollectionViewController, UICollectionViewDel
             }
             progress.dismiss()
         }
+        
     }
     
     // MARK: - CollectionView Event
@@ -107,6 +112,20 @@ class CommentPostViewController: UICollectionViewController, UICollectionViewDel
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 2
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let uuid = listComments[indexPath.item].userId
+        UserService.fetchUser(uuid) { result in
+            switch result {
+            case .failure(let error): self.showLoafError(message: error.localizedDescription)
+            case .success(let user):
+                guard let user = user else {return}
+                let profileVC = ProfileViewController(user)
+                profileVC.isDisplayMode = true
+                self.navigationController?.pushViewController(profileVC, animated: true)
+            }
+        }
     }
 
 }

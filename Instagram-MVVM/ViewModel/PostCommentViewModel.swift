@@ -9,7 +9,7 @@ import Foundation
 
 struct PostCommentViewModel {
     
-    var postComment:PostComment
+    fileprivate var postComment:PostComment
     
     init(_ postComment:PostComment) {
         self.postComment = postComment

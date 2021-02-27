@@ -25,6 +25,7 @@ class CommentInputAcessoryView: UIView {
         btn.addTapGesture { [weak self] in
             guard let comment = self?.commentTextView.text, !comment.isEmpty else { return}
             self?.addComment?(comment)
+            self?.clearComment()
         }
         return btn
     }()
@@ -56,6 +57,10 @@ class CommentInputAcessoryView: UIView {
     
     override var intrinsicContentSize: CGSize {
         return .zero
+    }
+    
+    fileprivate func clearComment() {
+        commentTextView.text = ""
     }
     
 }
