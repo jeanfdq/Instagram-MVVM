@@ -12,7 +12,9 @@ class NotificationsViewController: UICollectionViewController, UICollectionViewD
     // MARK: - Properties
     let reuseIdentifierCell = "ReuseIdentifier"
     
-    var listOfNotifications = [PostNotification]()
+    private var listOfNotifications = [PostNotification]() {
+        didSet { self.collectionView.reloadData() }
+    }
     
     // MARK: - Lifecycle
     
@@ -36,7 +38,6 @@ class NotificationsViewController: UICollectionViewController, UICollectionViewD
         let progress = self.showLoading()
         NotificationsService.fetchNotifications { list in
             self.listOfNotifications = list
-            self.collectionView.reloadData()
             progress.dismiss()
         }
     }

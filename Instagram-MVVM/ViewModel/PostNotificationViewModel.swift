@@ -32,4 +32,8 @@ class PostNotificationViewModel: NSObject {
         return URL(string: postNotification.postImageUrl ?? "")
     }
     
+    var notificationDateDescription:String {
+        return postNotification.timeStamp.dateValue().timeAgoDisplay()
+    }
+    
 }

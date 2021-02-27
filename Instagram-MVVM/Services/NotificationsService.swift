@@ -27,13 +27,7 @@ class NotificationsService: NSObject {
         
         COLLECTION_NOTIFICATIONS.document(currentUser.id).collection(NOTIFICATIONS_USERS).order(by: "timeStamp", descending: true).getDocuments { (snapshot, error) in
             
-            var listOfNotifications = [PostNotification]()
-            
-            _ = snapshot?.documents.map{ item in
-
-                listOfNotifications.append(PostNotification(item.data()))
-                
-            }
+            let listOfNotifications = (snapshot?.documents.map { PostNotification($0.data()) }) ?? [PostNotification]()
             
             completion(listOfNotifications)
             
