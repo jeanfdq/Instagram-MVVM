@@ -90,10 +90,32 @@ extension PostService {
         
         guard let userId = AuthService.shared.getCurrentUserId() else {return}
         
-        COLLECTION_LIKES.document(viewModel.postId).collection(POSTS_LIKED_USERS).document(userId).setData([:] ) { error in
-            completion(error == nil)
+        COLLECTION_LIKES.document(viewModel.postId).collection(POSTS_LIKED_USERS).getDocuments { (snapshot, error) in
+            
+            guard let documents = snapshot?.documents else {return}
+            
+            let list = documents.map { $0.documentID }
+            
+            if list.contains(userId) {
+                
+                unLikePost(viewModel.postId)
+                completion(error == nil)
+                
+            } else {
+                
+                COLLECTION_LIKES.document(viewModel.postId).collection(POSTS_LIKED_USERS).document(userId).setData([:] ) { error in
+                    completion(error == nil)
+                }
+                
+            }
         }
+    }
+    
+    class func unLikePost(_ postId:String) {
         
+        guard let userId = AuthService.shared.getCurrentUserId() else {return}
+        
+        COLLECTION_LIKES.document(postId).collection(POSTS_LIKED_USERS).document(userId).delete()
     }
     
     class func fetchQuantityPostLike(postId:String, _ completion:@escaping CompletionHandler<Int>) {

@@ -1,5 +1,5 @@
 //
-//  Notification.swift
+//  PostNotification.swift
 //  Instagram-MVVM
 //
 //  Created by Jean Paul Borges Manzini on 27/02/21.
@@ -21,9 +21,10 @@ enum NotificationType : Int {
     }
 }
 
-struct Notification {
-    let id:String
-    let uid:String
+struct PostNotification {
+    //let id:String
+    let userId:String
+    let userProfileUrl:String
     let postImageUrl:String?
     let postId:String?
     let type:NotificationType
@@ -31,8 +32,9 @@ struct Notification {
     
     init(_ dicitionary:[String:Any]) {
         
-        self.id = dicitionary["id"] as? String ?? ""
-        self.uid    = dicitionary["uid"] as? String ?? ""
+        //self.id = dicitionary["id"] as? String ?? ""
+        self.userId         = dicitionary["userId"] as? String ?? ""
+        self.userProfileUrl = dicitionary["userProfileUrl"] as? String ?? ""
         self.postImageUrl   = dicitionary["postImageUrl"] as? String ?? ""
         self.postId         = dicitionary["postId"] as? String ?? ""
         self.type           = NotificationType(rawValue: dicitionary["type"] as? Int ?? 0) ?? .like

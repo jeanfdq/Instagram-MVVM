@@ -35,7 +35,7 @@ class MainViewController: UITabBarController {
         
         let imageSelector = ImageSelectorViewController(user).setTemplateNavigationController(FactoryTabBarIcons.imageSelector())
         
-        let notification = NotificationsViewController().setTemplateNavigationController(FactoryTabBarIcons.notifications())
+        let notification = NotificationsViewController(collectionViewLayout: UICollectionViewFlowLayout()).setTemplateNavigationController(FactoryTabBarIcons.notifications())
         
         let profile = ProfileViewController(user).setTemplateNavigationController(FactoryTabBarIcons.profile())
         
