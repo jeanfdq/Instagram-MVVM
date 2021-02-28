@@ -31,3 +31,8 @@ let NOTIFICATIONS_USERS         = "notifications-users"
 enum DefaultsManagerKeys: String {
     case userLoggedData = "userLoggedData"
 }
+
+enum RemoteConfigKeys : String {
+    case app_out = "rc_app_out"
+    case app_out_msg = "rc_app_out_message"
+}

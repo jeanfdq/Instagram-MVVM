@@ -16,13 +16,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         guard let scene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: scene)
-        guard let window = window else {return}
         
         guard !JailbreakDetection.detect() else {
-            goToBlockJailbreak(window)
+            goToBlockJailbreak()
             return
         }
         
+        guard let window = window else {return}
         window.rootViewController = MainViewController()
         window.makeKeyAndVisible()
     }
@@ -37,6 +37,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func sceneDidBecomeActive(_ scene: UIScene) {
         // Called when the scene has moved from an inactive state to an active state.
         // Use this method to restart any tasks that were paused (or not yet started) when the scene was inactive.
+        
+        isMaintenanceSystem()
+        
     }
 
     func sceneWillResignActive(_ scene: UIScene) {
@@ -56,8 +59,21 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     // MARK: - functions
-    fileprivate func goToBlockJailbreak(_ window:UIWindow){
+    fileprivate func goToBlockJailbreak(){
+        guard let window = window else {return}
         window.rootViewController = JailbreakViewController()
+        window.makeKeyAndVisible()
+    }
+    
+    fileprivate func isMaintenanceSystem(){
+        guard let isMaintenance = RemoteConfigValues.RCAppOut().value(), isMaintenance else {return}
+        guard let messsage = RemoteConfigValues.RCAppOutMessage().value() else {return}
+        
+        let maintenanceVC = MaintenanceViewController()
+        maintenanceVC.maintenanceMsg.text = messsage
+        
+        guard let window = window else {return}
+        window.rootViewController = maintenanceVC
         window.makeKeyAndVisible()
     }
 
